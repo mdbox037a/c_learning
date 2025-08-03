@@ -1,2 +1,2 @@
-# codecademy
-exercises from codecademy practice work
+# c_learning
+exercises from C programming practice work
