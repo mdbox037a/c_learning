@@ -5,6 +5,6 @@ int main() {
 
   for (nc = 0; getchar() != EOF; ++nc)
     ; // for requires a body, but all work done in the test and increment, so
-      // add blank with ";"
+      // add blank with ";"; called a null statement
   printf("%.0f\n", nc);
 }
