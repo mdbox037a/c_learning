@@ -7,3 +7,7 @@ int main() {
   while ((c = getchar()) != EOF) // parentheses b/c != higher than =
     putchar(c);
 }
+
+// notes
+// getchar() just reads from stdin, so pipes or files can serve as
+// text stream inputs
