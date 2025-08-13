@@ -5,29 +5,68 @@
 
 int main() {
 
-  printf("### Excerpt Timer v1 ###\n");
+  int choice = 1;
 
   int tempo;
   int meter;
   int measures;
 
-  printf("What is the tempo of the excerpt? ");
-  scanf("%d", &tempo);
+  int excerpt_beats;
+  int excerpt_seconds;
+  int excerpt_minutes;
+  int excerpt_remainder;
 
-  printf("How many beats per bar are there (mostly)? ");
-  scanf("%d", &meter);
+  int total_seconds = 0;
+  int total_minutes;
+  int total_remainder;
 
-  printf("How many measures are there in the excerpt? ");
-  scanf("%d", &measures);
+  int counter;
 
-  int excerpt_beats = meter * measures;
-  int excerpt_seconds = (excerpt_beats * 60) / tempo;
-  int excerpt_minutes = excerpt_seconds / 60;
-  int remainder = excerpt_seconds - (excerpt_minutes * 60);
+  while (choice == 1) {
 
-  printf("---------------------------------------\n");
-  printf("The excerpt should take about %i minutes and %i seconds to play\n",
-         excerpt_minutes, remainder);
+    printf("\n### Excerpt Timer v1.1 ###\n");
+
+    printf("What is the tempo of the excerpt? ");
+    scanf("%d", &tempo);
+
+    printf("How many beats per bar are there (mostly)? ");
+    scanf("%d", &meter);
+
+    printf("How many measures are there in the excerpt? ");
+    scanf("%d", &measures);
+
+    // this is a bit bulky, but I have some plans for the intermediate variables
+    // in future updates
+
+    excerpt_beats = meter * measures;
+    excerpt_seconds = (excerpt_beats * 60) / tempo;
+    excerpt_minutes = excerpt_seconds / 60;
+    excerpt_remainder = excerpt_seconds - (excerpt_minutes * 60);
+
+    total_seconds += excerpt_seconds;
+    total_minutes = total_seconds / 60;
+    total_remainder = total_seconds - (total_minutes * 60);
+
+    printf("---------------------------------------\n");
+    printf(
+        "The excerpt should take about %i minutes and %i seconds to play\n\n",
+        excerpt_minutes,
+        excerpt_remainder); // TODO: make it so that if 1 minute, it doesn't
+                            // read "minutes"
+
+    if (counter > 0) {
+      printf(
+          "Together, these excerpts should take %i minutes and %i seconds to "
+          "play\n",
+          total_minutes, total_remainder);
+    }
+    printf("Would you like to add another excerpt time to this total?\n [1 = "
+           "yes, 2 = no] "); // TODO: make it so that something other than "2"
+                             // errors out, and asks for input again
+    scanf("%d", &choice);
+
+    counter++;
+  }
 
   // check values for debugging
   // printf("%d\n", tempo);
