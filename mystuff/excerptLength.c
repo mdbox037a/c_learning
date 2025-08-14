@@ -23,7 +23,7 @@ int main() {
   int retry = 1;
   int counter = 0;
 
-  printf("\n### Excerpt Timer v2.1 ###\n"); // TODO: create variable for version
+  printf("\n### Excerpt Timer v2.2 ###\n"); // TODO: create variable for version
 
   while (choice == 1) {
 
@@ -49,11 +49,16 @@ int main() {
     total_remainder = total_seconds - (total_minutes * 60);
 
     printf("---------------------------------------\n");
-    printf(
-        "The excerpt should take about %i minutes and %i seconds to play\n\n",
-        excerpt_minutes,
-        excerpt_remainder); // TODO: make it so that if 1 minute, it doesn't
-                            // read "minutes"
+
+    if (excerpt_minutes == 1) {
+      printf(
+          "The excerpt should take about %i minute and %i seconds to play\n\n",
+          excerpt_minutes, excerpt_remainder);
+    } else {
+      printf(
+          "The excerpt should take about %i minutes and %i seconds to play\n\n",
+          excerpt_minutes, excerpt_remainder);
+    }
 
     if (counter > 0) {
       printf("Together, these %i excerpts should take about %i minutes and %i "
