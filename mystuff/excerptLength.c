@@ -20,13 +20,14 @@ int main() {
   int total_minutes;
   int total_remainder;
 
-  int counter;
+  int retry = 1;
+  int counter = 0;
+
+  printf("\n### Excerpt Timer v2.1 ###\n"); // TODO: create variable for version
 
   while (choice == 1) {
 
-    printf("\n### Excerpt Timer v1.1 ###\n");
-
-    printf("What is the tempo of the excerpt? ");
+    printf("\nWhat is the tempo of the excerpt? ");
     scanf("%d", &tempo);
 
     printf("How many beats per bar are there (mostly)? ");
@@ -55,17 +56,29 @@ int main() {
                             // read "minutes"
 
     if (counter > 0) {
-      printf(
-          "Together, these excerpts should take %i minutes and %i seconds to "
-          "play\n",
-          total_minutes, total_remainder);
+      printf("Together, these %i excerpts should take about %i minutes and %i "
+             "seconds to play\n",
+             counter, total_minutes, total_remainder);
     }
-    printf("Would you like to add another excerpt time to this total?\n [1 = "
-           "yes, 2 = no] "); // TODO: make it so that something other than "2"
-                             // errors out, and asks for input again
-    scanf("%d", &choice);
 
-    counter++;
+    retry = 1;
+
+    while (retry == 1) {
+      printf("Would you like to add another excerpt time to this total?\n [1 = "
+             "yes, 2 = no] ");
+      scanf("%d", &choice);
+
+      if (choice == 2) {
+        printf("\n### Thank you for using excerptTimer! ###\n");
+        retry = 0;
+      } else if (choice == 1) {
+        counter++;
+        retry = 0;
+      } else {
+        printf("\nThat is not a valid choice...\n");
+        retry = 1;
+      }
+    }
   }
 
   // check values for debugging
