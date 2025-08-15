@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 // a small experimental program to help predict how long it takes to play an
 // excerpt
@@ -16,6 +17,9 @@ int main() {
   int excerpt_minutes;
   int excerpt_remainder;
 
+  char min_unit[8];
+  char sec_unit[8];
+
   int total_seconds = 0;
   int total_minutes;
   int total_remainder;
@@ -23,7 +27,7 @@ int main() {
   int retry = 1;
   int counter = 0;
 
-  printf("\n### Excerpt Timer v2.2 ###\n"); // TODO: create variable for version
+  printf("\n### Excerpt Timer v2.3 ###\n"); // TODO: create variable for version
 
   while (choice == 1) {
 
@@ -51,19 +55,36 @@ int main() {
     printf("---------------------------------------\n");
 
     if (excerpt_minutes == 1) {
-      printf(
-          "The excerpt should take about %i minute and %i seconds to play\n\n",
-          excerpt_minutes, excerpt_remainder);
+      strcpy(min_unit, "minute");
     } else {
-      printf(
-          "The excerpt should take about %i minutes and %i seconds to play\n\n",
-          excerpt_minutes, excerpt_remainder);
+      strcpy(min_unit, "minutes");
+    }
+
+    if (excerpt_remainder == 1) {
+      strcpy(sec_unit, "second");
+    } else {
+      strcpy(sec_unit, "seconds");
+    }
+
+    printf("The excerpt should take about %i %s and %i %s to play\n\n",
+           excerpt_minutes, min_unit, excerpt_remainder, sec_unit);
+
+    if (total_minutes == 1) {
+      strcpy(min_unit, "minute");
+    } else {
+      strcpy(min_unit, "minutes");
+    }
+
+    if (total_remainder == 1) {
+      strcpy(sec_unit, "second");
+    } else {
+      strcpy(sec_unit, "seconds");
     }
 
     if (counter > 0) {
-      printf("Together, these %i excerpts should take about %i minutes and %i "
-             "seconds to play\n",
-             counter, total_minutes, total_remainder);
+      printf("Together, these %i excerpts should take about %i %s and %i "
+             "%s to play\n",
+             counter, total_minutes, min_unit, total_remainder, sec_unit);
     }
 
     retry = 1;
