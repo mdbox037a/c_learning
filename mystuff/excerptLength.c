@@ -28,8 +28,7 @@ int main() {
   int retry = 1;
   int counter = 0;
 
-  printf("\n### Excerpt Timer v%.2f ###\n",
-         version); // TODO: create variable for version
+  printf("\n### Excerpt Timer v%.2f ###\n", version);
 
   while (choice == 1) {
 
