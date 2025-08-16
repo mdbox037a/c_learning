@@ -6,6 +6,7 @@
 
 int main() {
 
+  float version = 2.31;
   int choice = 1;
 
   int tempo;
@@ -27,7 +28,8 @@ int main() {
   int retry = 1;
   int counter = 0;
 
-  printf("\n### Excerpt Timer v2.3 ###\n"); // TODO: create variable for version
+  printf("\n### Excerpt Timer v%.2f ###\n",
+         version); // TODO: create variable for version
 
   while (choice == 1) {
 
