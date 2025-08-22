@@ -1,4 +1,5 @@
 /* Exercise 1-12: Write a program that prints its input one word per line*/
+/* version 1.1*/
 
 #include <stdio.h>
 
@@ -10,8 +11,11 @@ int main() {
 
   c = 0;
   state = OUT;
+
   while ((c = getchar()) != EOF) {
-    if (c == '\n' || c == ' ' || c == '\t')
+    if (c == '\n')
+      putchar('\n');
+    else if (c == ' ' || c == '\t')
       state = OUT;
     else if (state == OUT) {
       state = IN;
@@ -20,4 +24,5 @@ int main() {
     } else
       putchar(c);
   }
+  putchar('\n');
 }
