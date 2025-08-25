@@ -4,7 +4,7 @@
 #define OUT 0
 
 int main() {
-  int c, i, state, length;
+  int c, i, j, state, length;
   int lengths[22];
 
   state = OUT;
@@ -38,7 +38,15 @@ int main() {
 
   // TODO: instead of printing numbers, print a histogram
   for (i = 0; i < 22; ++i) {
-    printf("%d: %d\n", i, lengths[i]);
+    printf("%2d:", i);
+    if (lengths[i] != 0) {
+      for (j = 0; j < lengths[i]; ++j) {
+        printf("|");
+      }
+    } else {
+      ;
+    }
+    printf("\n");
   }
 }
 
