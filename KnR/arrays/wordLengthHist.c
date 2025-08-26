@@ -60,10 +60,10 @@ int main() {
   printf("======Word Lengths Histogram=====\n");
 
   for (i = 1; i < (last_entry + 1); ++i) {
-    if (i == 21)
-      printf("21+:");
-    else
+    if (i != 21)
       printf("%3d:", i);
+    else
+      printf("21+:");
 
     if (lengths[i] != 0) {
       for (j = 0; j < lengths[i]; ++j) {
