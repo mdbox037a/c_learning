@@ -1,2 +1,4 @@
 # ignore any files placed in a binaries folder
 binaries/
+
+.clang-format
