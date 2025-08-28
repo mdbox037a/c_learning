@@ -4,9 +4,13 @@
 int power(int base, int n);
 
 int main() {
+	int base = 2;
+	int exponent = 10;
 	int result;
+
 	result = power(2, 10);
-	printf("the answer is %d\n", result);
+
+	printf("%d to the %dth power is %d\n", base, exponent, result);
 }
 
 int power(int base, int n) {
