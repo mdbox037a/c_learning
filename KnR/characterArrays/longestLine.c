@@ -32,7 +32,7 @@ int get_line(char s[], int lim) {
 		s[i] = c;
 		++i;
 	}
-	s[i] = '\0';
+	s[i] = '\0'; // place null character at end of array
 	return i;
 }
 
