@@ -1,0 +1,8 @@
+Project notes:
+
+
+My first ever segmentation fault!  KnR, p. 30, trying to output the length of a
+string of arbitrary length:
+
+[1]    88691 segmentation fault (core dumped)  binaries/longestLine2
+let's go
