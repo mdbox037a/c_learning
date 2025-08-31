@@ -2,25 +2,7 @@
 #define MAXIMUM 1000
 #define BAR 80
 
-/* PLANNING
- * main()
- * - initialize array of MAXIMUM size
- * - call line_reader function(new_array, MAXIMUM)
- * - receive string from line_reader
- *   - if less than 80 chars, discard
- *   - if >= 80 chars, print it until \0
- * - call cleaner function
- *
- * line_reader function
- * - receive input
- * - store in an array up to MAXIMUM size
- * - place \0 at end of string
- * - return string_length
- *
- * cleaner function (maybe... I don't know how \0 works...)
- * - iterate over string and place 0 at each entry to \0, inclusive
- */
-
+// TODO: need to alter logic to hold printing of 80+ lines until EOF
 int line_reader(char line[], int max_length);
 
 int main() {
