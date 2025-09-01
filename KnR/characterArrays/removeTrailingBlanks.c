@@ -1,13 +1,6 @@
 /* Exercise 1-18: Write a program to remove trailing blanks and tabs from
  * each line of input, and to delete entirely blank lines */
 
-/* planning
- * get_line function with mods
- * - still receive input and cap wit \0
- * - if c == ' ' or '\t', NOP
- *
- * */
-
 #include <stdio.h>
 #define MAX_STRING_LEN 1000
 
@@ -17,15 +10,11 @@ void trim_line(char line[], int len);
 int main() {
 	int len;
 	char line[MAX_STRING_LEN];
-	// char trimmed[MAX_STRING_LEN];
 
 	while ((len = get_line(line, MAX_STRING_LEN)) > 0) {
-		printf("%d", len);
 		printf("%s<--- end of original string\n", line);
-		// printf("<--- end of original string\n");
 		trim_line(line, len);
 		printf("%s<--- end of trimmed string\n", line);
-		// printf("<--- end of trimmed string\n");
 	}
 
 	return 0;
@@ -40,7 +29,6 @@ int get_line(char line[], int max) {
 		line[i] = '\0';
 		//++i;
 	}
-	// line[i] = '\0';
 	return i;
 }
 
