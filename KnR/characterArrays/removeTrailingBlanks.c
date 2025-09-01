@@ -20,8 +20,11 @@ int main() {
 	char trimmed[MAX_STRING_LEN];
 
 	while ((len = get_line(line, MAX_STRING_LEN)) > 0) {
+		printf("%s", line);
+		printf("<--- end of original string\n");
 		trim_line(line, len);
-		printf("%s\n", line);
+		printf("%s", line);
+		printf("<--- end of trimmed string\n");
 	}
 
 	return 0;
