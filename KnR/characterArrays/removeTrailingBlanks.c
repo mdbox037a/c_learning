@@ -17,14 +17,15 @@ void trim_line(char line[], int len);
 int main() {
 	int len;
 	char line[MAX_STRING_LEN];
-	char trimmed[MAX_STRING_LEN];
+	// char trimmed[MAX_STRING_LEN];
 
 	while ((len = get_line(line, MAX_STRING_LEN)) > 0) {
-		printf("%s", line);
-		printf("<--- end of original string\n");
+		printf("%d", len);
+		printf("%s<--- end of original string\n", line);
+		// printf("<--- end of original string\n");
 		trim_line(line, len);
-		printf("%s", line);
-		printf("<--- end of trimmed string\n");
+		printf("%s<--- end of trimmed string\n", line);
+		// printf("<--- end of trimmed string\n");
 	}
 
 	return 0;
@@ -36,17 +37,17 @@ int get_line(char line[], int max) {
 	for (i = 0; i < max - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
 		line[i] = c;
 	if (c == '\n') {
-		line[i] = c;
-		++i;
+		line[i] = '\0';
+		//++i;
 	}
-	line[i] = '\0';
+	// line[i] = '\0';
 	return i;
 }
 
 void trim_line(char line[], int len) {
 	int i = len - 1;
 	while (line[i] == ' ' || line[i] == '\t') {
-		line[i + 1] = '0';
+		// line[i + 1] = '0';
 		line[i] = '\0';
 		--i;
 	}
