@@ -26,7 +26,6 @@ int main() {
 	return 0;
 }
 
-// TODO: fix the logic here so that the /0 stays at the end of the string
 void reverse(char reverse_s[], char s[], int i) {
 	int j = 0;
 
