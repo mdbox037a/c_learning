@@ -4,7 +4,7 @@
 #include <stdio.h>
 #define MAX_STRING_LEN 1000
 
-void reverse(char reverse_s, char s);
+void reverse(char reverse_s[], char s[], int i);
 
 int main() {
 	int c;
@@ -17,12 +17,22 @@ int main() {
 			s[i] = c;
 			++i;
 			s[i] = '\0';
-			reverse(reverse_s, s);
+			reverse(reverse_s, s, i);
 		} else {
 			s[i] = c;
 			++i;
 		}
 	}
+
+	printf("%s\n", reverse_s);
 }
 
-void reverse(char reverse_s, char s) {}
+// TODO: fix the logic here so that the /0 stays at the end of the string
+void reverse(char reverse_s[], char s[], int i) {
+	int j = 0;
+
+	for (i = i; i >= 0; --i) {
+		reverse_s[j] = s[i];
+		--j;
+	}
+}
