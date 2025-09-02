@@ -14,25 +14,24 @@ int main() {
 
 	while ((c = getchar()) != EOF) {
 		if (c == '\n') {
-			s[i] = c;
-			++i;
 			s[i] = '\0';
 			reverse(reverse_s, s, i);
+			printf("%s\n", reverse_s);
+			i = 0;
 		} else {
 			s[i] = c;
 			++i;
 		}
 	}
-
-	printf("%s\n", reverse_s);
+	return 0;
 }
 
 // TODO: fix the logic here so that the /0 stays at the end of the string
 void reverse(char reverse_s[], char s[], int i) {
 	int j = 0;
 
-	for (i = i; i >= 0; --i) {
+	for (i = i - 1; i >= 0; --i) {
 		reverse_s[j] = s[i];
-		--j;
+		++j;
 	}
 }
