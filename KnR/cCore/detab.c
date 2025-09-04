@@ -24,18 +24,19 @@ int main() {
 }
 
 int get_line_detab(char line[]) {
-	int c, i, j;
+	int c, num_spaces, i, j;
 
-	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';
-	     ++i) {
-		printf("%d", (TAB_SIZE - (i % TAB_SIZE)));
+	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';) {
+		num_spaces = (TAB_SIZE - (i % TAB_SIZE));
 		if (c == '\t') {
-			for (j = 0; j < (TAB_SIZE - (i % TAB_SIZE)); ++j) {
+			for (j = 0; j < num_spaces; ++j) {
 				line[i] = ' ';
 				++i;
 			}
-		} else
+		} else {
 			line[i] = c;
+			++i;
+		}
 	}
 	if (c == '\n') {
 		line[i] = c;
