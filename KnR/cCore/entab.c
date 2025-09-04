@@ -7,6 +7,8 @@
 
 #define MAX_LEN 1000
 #define TAB_LEN 4
+#define IN 1
+#define OUT 0
 
 int mod_line(line[]);
 
@@ -21,10 +23,28 @@ int main() {
 int mod_line(line[]) {
 	int c, num_tabs, num_spaces, i;
 	int space_counter = 0;
+	int state = OUT;
 
-	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';) {
+	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';
+	     ++i) {
 		if (c == ' ') {
-			++space_counter;
+			if (state == IN) {
+				state = OUT;
+				space_counter = 0;
+				++space_counter;
+			}
+			if (state == OUT)
+				++space_counter;
+		}
+		if (c != ' ') {
+			if (state == IN) {
+				;
+			}
+			if (state == OUT) {
+				state = IN;
+				// entab logic here
+			}
 		}
 	}
+	return i;
 }
