@@ -10,17 +10,17 @@
 #define IN 1
 #define OUT 0
 
-int mod_line(line[]);
+int mod_line(char line[]);
 
 int main() {
-	char line[];
+	char line[MAX_LEN];
 
 	while ((mod_line(line)) > 0) {
 		printf("%s", line);
 	}
 }
 
-int mod_line(line[]) {
+int mod_line(char line[]) {
 	int c, num_tabs, num_spaces, i;
 	int space_counter = 0;
 	int state = OUT;
