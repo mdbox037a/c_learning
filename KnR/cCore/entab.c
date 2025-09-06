@@ -21,7 +21,7 @@ int main() {
 }
 
 int mod_line(char line[]) {
-	int c, num_tabs, num_spaces, i, j, k;
+	int c, i, j, k;
 	int space_counter = 0;
 	int state = IN;
 
@@ -49,6 +49,7 @@ int mod_line(char line[]) {
 					++i;
 				}
 				// ending spaces
+				// TODO: determine why this needs to be j = 1
 				for (j = 1; j < space_counter % TAB_LEN; ++j) {
 					line[i] = ' ';
 					++i;
