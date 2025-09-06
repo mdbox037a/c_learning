@@ -16,17 +16,16 @@ int main() {
 	char line[MAX_LEN];
 
 	while ((mod_line(line)) > 0) {
-		printf("%s", line);
+		printf("%s\n", line);
 	}
 }
 
 int mod_line(char line[]) {
-	int c, num_tabs, num_spaces, i;
+	int c, num_tabs, num_spaces, i, j, k;
 	int space_counter = 0;
-	int state = OUT;
+	int state = IN;
 
-	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';
-	     ++i) {
+	for (i = 0; i < MAX_LEN - 1 && (c = getchar()) != EOF && c != '\n';) {
 		if (c == ' ') {
 			if (state == IN) {
 				state = OUT;
@@ -38,13 +37,35 @@ int mod_line(char line[]) {
 		}
 		if (c != ' ') {
 			if (state == IN) {
-				;
+				line[i] = c;
+				++i;
 			}
 			if (state == OUT) {
 				state = IN;
 				// entab logic here
+				// starting tabs
+				for (j = 0; j < space_counter / TAB_LEN; ++j) {
+					line[i] = '\t';
+					++i;
+				}
+				// ending spaces
+				for (j = 1; j < space_counter % TAB_LEN; ++j) {
+					line[i] = ' ';
+					++i;
+				}
+				line[i] = c;
+				++i;
 			}
 		}
 	}
+	if (state == OUT) {
+		for (j = 0; j < space_counter; ++j) {
+			line[i] = ' ';
+			++i;
+		}
+		line[i] = '\0';
+	}
+	if (state == IN)
+		line[i] = '\0';
 	return i;
 }
