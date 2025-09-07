@@ -44,7 +44,7 @@ void prep_line(char out_line[], char in_line[]) {
 	int state = IN;
 	int checkpoint = 0;
 
-	for (i = 0; in_line[i] == '\0'; ++i) {
+	for (i = 0; in_line[i] != '\0'; ++i) {
 		if (state == OUT && (i % (LINE_BREAK - 1)) == 0) {
 			out_line[j] = '\n';
 			++j;
