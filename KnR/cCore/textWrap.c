@@ -22,6 +22,10 @@ int main() {
 	while ((get_line(in_line, MAX_LEN)) > 0) {
 		prep_line(out_line, in_line);
 		printf("%s\n", out_line);
+		for (i = 0; i < MAX_LEN; ++i) {
+			out_line[i] = '\0';
+			in_line[i] = '\0';
+		}
 	}
 }
 
@@ -40,46 +44,32 @@ int get_line(char in_line[], int lim) {
 
 void prep_line(char out_line[], char in_line[]) {
 	int i = 0;
-	int j = i;
-	int state = IN;
-	int checkpoint = 0;
+	int j = 0;
+	int line_len = 0;
+	int last_space = -1;
 
-	for (i = 0; in_line[i] != '\0'; ++i) {
-		if (state == OUT && (i % (LINE_BREAK - 1)) == 0) {
-			out_line[j] = '\n';
-			++j;
+	while (in_line[i] != '\0') {
+		out_line[j] = in_line[i];
+
+		if (in_line[i] == ' ' || in_line[i] == '\t') {
+			last_space = j;
 		}
-		if (state == OUT && (in_line[i] == ' ' || in_line[i] == '\t')) {
-			out_line[j] = in_line[i];
-			checkpoint = j;
-			++j;
-		}
-		if (state == OUT && in_line[i] != ' ' && in_line[i] != '\t') {
-			state = IN;
-			out_line[j] = in_line[i];
-			++j;
-		}
-		if (state == IN && (i % (LINE_BREAK - 1)) == 0) {
-			if (checkpoint > 0) {
-				out_line[checkpoint] = '\n';
-				++j;
-			}
-			if (checkpoint == 0) {
-				out_line[j] = '\n';
-				++j;
+
+		if (line_len >= LINE_BREAK) {
+			if (last_space != -1) {
+				out_line[last_space] = '\n';
+				line_len = j - last_space;
+				last_space = -1;
+			} else {
+				// Word is longer than the line, so break it
+				out_line[j + 1] = '\n';
+				j++;
+				line_len = 0;
 			}
 		}
-		if (state == IN && in_line[i] != ' ' && in_line[i] != '\t') {
-			out_line[j] = in_line[i];
-			++j;
-		}
-		if (state == IN && (in_line[i] == ' ' || in_line[i] == '\t')) {
-			state = OUT;
-			out_line[j] = in_line[i];
-			checkpoint = j;
-			++j;
-		}
+		i++;
+		j++;
+		line_len++;
 	}
-	++j;
 	out_line[j] = '\0';
 }
