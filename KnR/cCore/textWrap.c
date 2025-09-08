@@ -7,8 +7,6 @@
 
 #define MAX_LEN 1000
 #define LINE_BREAK 80
-#define IN 1
-#define OUT 0
 
 int get_line(char in_line[], int lim);
 void prep_line(char out_line[], char in_line[]);
