@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+int print_buffer(char buffer[], int in_comment);
+int hold_buffer(char buffer[], int in_comment);
+
 int main() {
 	int c;
 	int i = 0;
@@ -24,6 +27,15 @@ int main() {
 				printf("%c", buffer[0]);
 				buffer[0] = buffer[1];
 			}
+		}
+	}
+
+	while ((c = getchar()) != EOF && in_comment == 1) {
+		buffer[1] = c;
+		if (buffer[0] == '*' && buffer[1] == '/')
+			in_comment = 0;
+		else {
+			buffer[0] = buffer[1];
 		}
 	}
 }
