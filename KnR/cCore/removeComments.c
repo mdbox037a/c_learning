@@ -4,12 +4,15 @@
 
 #include <stdio.h>
 
+int ind;
+
 int print_buffer(char buffer[], int c, int in_comment);
 int hold_buffer(char buffer[], int c, int in_comment);
 
 int main() {
 	int c;
-	int i = 0;
+	extern int ind;
+	ind = 0;
 	int in_comment = 0;
 
 	char buffer[3];
@@ -24,12 +27,12 @@ int main() {
 }
 
 int print_buffer(char buffer[], int c, int in_comment) {
-	int i = 0;
+	extern int ind;
 
-	if (i == 0) {
+	if (ind == 0) {
 		buffer[0] = c;
-		++i;
-	} else if (i == 1) {
+		++ind;
+	} else if (ind == 1) {
 		buffer[1] = c;
 		if (buffer[0] == '/' && buffer[1] == '*')
 			in_comment = 1;
