@@ -4,42 +4,33 @@
 
 #include <stdio.h>
 
-int ind;
-
 int print_buffer(char buffer[], int c, int in_comment);
 int hold_buffer(char buffer[], int c, int in_comment);
 
 int main() {
 	int c;
-	extern int ind;
-	ind = 0;
 	int in_comment = 0;
 
 	char buffer[3];
+	buffer[0] = '\0';
+	buffer[1] = '\0';
 	buffer[2] = '\0';
 
 	while ((c = getchar()) != EOF) {
 		if (in_comment == 0)
 			print_buffer(buffer, c, in_comment);
-		else if (in_comment == 1)
+		else
 			hold_buffer(buffer, c, in_comment);
 	}
 }
 
 int print_buffer(char buffer[], int c, int in_comment) {
-	extern int ind;
-
-	if (ind == 0) {
-		buffer[0] = c;
-		++ind;
-	} else if (ind == 1) {
-		buffer[1] = c;
-		if (buffer[0] == '/' && buffer[1] == '*')
-			in_comment = 1;
-		else {
-			printf("%c", buffer[0]);
-			buffer[0] = buffer[1];
-		}
+	buffer[1] = c;
+	if (buffer[0] == '/' && buffer[1] == '*')
+		in_comment = 1;
+	else {
+		printf("%c", buffer[1]);
+		buffer[0] = buffer[1];
 	}
 	return in_comment;
 }
