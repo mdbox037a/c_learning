@@ -1,4 +1,6 @@
-# ignore any files placed in a binaries folder
+# ignore any files placed in these folders
 binaries/
+testing_inputs/
 
+# ignote files with these extensions
 .clang-format
