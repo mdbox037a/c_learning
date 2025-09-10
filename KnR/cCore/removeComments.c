@@ -4,12 +4,15 @@
 
 #include <stdio.h>
 
+int in_comment;
+
 int print_buffer(char buffer[], int c, int in_comment);
 int hold_buffer(char buffer[], int c, int in_comment);
 
 int main() {
 	int c;
-	int in_comment = 0;
+	extern int in_comment;
+	in_comment = 0;
 
 	char buffer[3];
 	buffer[0] = '\0';
@@ -37,6 +40,8 @@ int print_buffer(char buffer[], int c, int in_comment) {
 
 int hold_buffer(char buffer[], int c, int in_comment) {
 	buffer[1] = c;
+	// TODO: understand if perhaps the ordering here is breaking out of the
+	// function too soon
 	if (buffer[0] == '*' && buffer[1] == '/')
 		in_comment = 0;
 	else
