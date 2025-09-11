@@ -37,8 +37,6 @@ int print_buffer(char buffer[], int c, int in_comment) {
 	else if (buffer[1] == '/')
 		in_comment = -1;
 	else {
-		// TODO: now the comment is almost all removed, except for the
-		// first '/' --> need to figure this out
 		printf("%c", buffer[1]);
 		buffer[0] = buffer[1];
 	}
