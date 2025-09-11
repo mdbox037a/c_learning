@@ -4,15 +4,12 @@
 
 #include <stdio.h>
 
-int in_comment;
-
 int print_buffer(char buffer[], int c, int in_comment);
 int hold_buffer(char buffer[], int c, int in_comment);
 
 int main() {
 	int c;
-	extern int in_comment;
-	in_comment = 0;
+	int in_comment = 0;
 
 	char buffer[3];
 	buffer[0] = '\0';
@@ -21,9 +18,12 @@ int main() {
 
 	while ((c = getchar()) != EOF) {
 		if (in_comment == 0)
-			print_buffer(buffer, c, in_comment);
+			in_comment = print_buffer(buffer, c, in_comment);
+		// had to assign function return value to in_comment
+		// in order to have function local var by same name
+		// get back "out" of the function. lol
 		else
-			hold_buffer(buffer, c, in_comment);
+			in_comment = hold_buffer(buffer, c, in_comment);
 	}
 }
 
@@ -32,6 +32,8 @@ int print_buffer(char buffer[], int c, int in_comment) {
 	if (buffer[0] == '/' && buffer[1] == '*')
 		in_comment = 1;
 	else {
+		// TODO: now the comment is almost all removed, except for the
+		// first '/' --> need to figure this out
 		printf("%c", buffer[1]);
 		buffer[0] = buffer[1];
 	}
@@ -40,8 +42,6 @@ int print_buffer(char buffer[], int c, int in_comment) {
 
 int hold_buffer(char buffer[], int c, int in_comment) {
 	buffer[1] = c;
-	// TODO: understand if perhaps the ordering here is breaking out of the
-	// function too soon
 	if (buffer[0] == '*' && buffer[1] == '/')
 		in_comment = 0;
 	else
