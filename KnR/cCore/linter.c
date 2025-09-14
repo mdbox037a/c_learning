@@ -31,7 +31,11 @@ void track_characters(int c) {
 void check_pairs() {
 	extern int characters[];
 	if (characters['{'] != characters['}'])
-		printf("unpaired '{' or '}'\n");
+		printf("unclosed '{}'\n");
+	if (characters['('] != characters[')'])
+		printf("unclosed '()'\n");
+	if (characters['['] != characters[']'])
+		printf("unclosed '[]'\n");
 }
 
 // TODO: initial POC for character-tracking array done; now need to compare
