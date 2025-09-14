@@ -5,25 +5,33 @@
 #include <stdio.h>
 int characters[256];
 
-int track_characters(int c);
+void track_characters(int c);
+void check_pairs();
 
 int main() {
 	int c, i, status;
 	extern int characters[];
 
 	while ((c = getchar()) != EOF) {
-		status = track_characters(c);
+		track_characters(c);
 	}
+	check_pairs();
 
-	for (i = 0; i < 256; ++i) {
-		printf("%c:%d\n", i, characters[i]);
-	}
+	// for (i = 0; i < 256; ++i) {
+	//	printf("%c:%d\n", i, characters[i]);
+	// }
+	return 0;
 }
 
-int track_characters(int c) {
+void track_characters(int c) {
 	extern int characters[];
 	characters[c] += 1;
-	return 0;
+}
+
+void check_pairs() {
+	extern int characters[];
+	if (characters['{'] != characters['}'])
+		printf("unpaired '{' or '}'\n");
 }
 
 // TODO: initial POC for character-tracking array done; now need to compare
