@@ -38,5 +38,5 @@ void check_pairs() {
 		printf("unclosed '[]'\n");
 }
 
-// TODO: initial POC for character-tracking array done; now need to compare
-// results in array to determin unclosed brackets/parentheses/braces, etc.
+// TODO: complete logic for "" and ''
+// TODO: begin plan for escape sequences and comments linting
