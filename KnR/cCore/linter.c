@@ -36,7 +36,10 @@ void check_pairs() {
 		printf("unclosed '()'\n");
 	if (characters['['] != characters[']'])
 		printf("unclosed '[]'\n");
+	if ((characters['"'] % 2) != 0)
+		printf("unclosed double quotation marks\n");
+	if ((characters['\''] % 2) != 0)
+		printf("unclosed single quotations marks\n");
 }
 
-// TODO: complete logic for "" and ''
 // TODO: begin plan for escape sequences and comments linting
