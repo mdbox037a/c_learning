@@ -11,7 +11,7 @@ int track_characters(int c, int in_comment);
 void check_pairs();
 
 int main() {
-	int c, i, status;
+	int c, i, d;
 	int in_comment = 0;
 	extern int characters[];
 	extern char buffer[];
@@ -20,7 +20,10 @@ int main() {
 		buffer[i] = '\0';
 
 	while ((c = getchar()) != EOF) {
-		in_comment = track_characters(c, in_comment);
+		if (c == '\\')
+			d = getchar(); // essentially, throw away the next char
+		else
+			in_comment = track_characters(c, in_comment);
 	}
 	check_pairs();
 
@@ -81,5 +84,3 @@ void check_pairs() {
 	if ((characters['\''] % 2) != 0)
 		printf("unclosed single quotations marks\n");
 }
-
-// TODO: implement escape character logic
