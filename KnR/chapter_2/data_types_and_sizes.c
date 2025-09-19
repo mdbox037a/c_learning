@@ -7,10 +7,8 @@
 #include <stdio.h>
 
 int main() {
-	char character;
-	short shorty;
-	int integer;
-	long longy;
+
+	int i;
 
 	printf("##### from macros #####\n");
 	printf("----- signed int/char types -----\n");
@@ -25,6 +23,17 @@ int main() {
 	printf("uint: %d\n", UINT_MAX);
 	printf("ulong: %ld\n", ULONG_MAX);
 	printf("\n");
+
+	printf("##### computed values #####\n");
+
+	// underflow/overflow char
+	char minchar, maxchar;
+	minchar = maxchar = 0;
+	for (minchar = 0; minchar >= 0; ++minchar)
+		;
+	for (maxchar = 0; maxchar <= 0; --maxchar)
+		;
+	printf("char: %d to %d bits\n", minchar, maxchar);
 
 	return 0;
 }
