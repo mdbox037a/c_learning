@@ -8,8 +8,6 @@
 
 int main() {
 
-	int i;
-
 	printf("##### from macros #####\n");
 	printf("----- signed int/char types -----\n");
 	printf("char: %d to %d bits\n", CHAR_MIN, CHAR_MAX);
@@ -27,6 +25,7 @@ int main() {
 	printf("##### computed values #####\n");
 
 	// underflow/overflow char
+	printf("----- underflow/overflow -----");
 	char minchar, maxchar;
 	minchar = maxchar = 0;
 	for (minchar = 0; minchar >= 0; ++minchar)
@@ -34,6 +33,14 @@ int main() {
 	for (maxchar = 0; maxchar <= 0; --maxchar)
 		;
 	printf("char: %d to %d bits\n", minchar, maxchar);
+
+	// power of two method
+	printf("----- power of two -----");
+	char minpowerchar, maxpowerchar;
+	int i, previous;
+	minpowerchar = maxpowerchar = previous = 1;
+	// TODO: construct power exponent loop to double char until over/under
+	printf("char min: %d\n", minpowerchar);
 
 	return 0;
 }
