@@ -40,6 +40,12 @@ int main() {
 	int i, previous;
 	minpowerchar = maxpowerchar = previous = 1;
 	// TODO: construct power exponent loop to double char until over/under
+
+	int result, base, power;
+	for (i = 0; i < power; ++i) {
+		result *= base;
+	}
+
 	printf("char min: %d\n", minpowerchar);
 
 	return 0;
