@@ -6,6 +6,8 @@
 #include <limits.h>
 #include <stdio.h>
 
+int calc_exp(int base, int power);
+
 int main() {
 
 	printf("##### from macros #####\n");
@@ -41,12 +43,19 @@ int main() {
 	minpowerchar = maxpowerchar = previous = 1;
 	// TODO: construct power exponent loop to double char until over/under
 
-	int result, base, power;
-	for (i = 0; i < power; ++i) {
-		result *= base;
-	}
-
 	printf("char min: %d\n", minpowerchar);
 
 	return 0;
+}
+
+int calc_exp(int base, int power) {
+	int result, base, power;
+
+	if (power == 0) {
+		return 1;
+	}
+
+	for (i = 1; i < power; ++i) {
+		result *= base;
+	}
 }
