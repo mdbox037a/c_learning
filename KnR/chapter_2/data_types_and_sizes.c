@@ -37,25 +37,39 @@ int main() {
 	printf("char: %d to %d bits\n", minchar, maxchar);
 
 	// power of two method
-	printf("----- power of two -----");
-	char minpowerchar, maxpowerchar;
-	int i, previous;
-	minpowerchar = maxpowerchar = previous = 1;
-	// TODO: construct power exponent loop to double char until over/under
+	printf("----- power of two -----\n");
+	int minpowerint, maxpowerint, previous, counter, base;
+	base = 2;
+	minpowerint = counter = 0;
 
-	printf("char min: %d\n", minpowerchar);
+	while (minpowerint >= 0) {
+		++counter;
+		minpowerint = calc_exp(base, counter);
+	}
+	printf("int bit size: %d, plus 1 sign bit\n", counter);
+	printf("int min: %d\n", minpowerint);
+
+	previous = maxpowerint = counter = 0;
+	while (maxpowerint >= previous) {
+		++counter;
+		previous = maxpowerint;
+		maxpowerint = calc_exp(base, counter) - 1;
+	}
+	printf("int max: %d\n", previous);
 
 	return 0;
 }
 
 int calc_exp(int base, int power) {
-	int result, base, power;
+	int result, i;
+	result = base;
 
 	if (power == 0) {
 		return 1;
-	}
-
-	for (i = 1; i < power; ++i) {
-		result *= base;
+	} else {
+		for (i = 1; i < power; ++i) {
+			result *= base;
+		}
+		return result;
 	}
 }
