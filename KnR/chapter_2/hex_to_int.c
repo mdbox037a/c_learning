@@ -6,10 +6,10 @@
 
 #define HEX_LEN 11
 
-int htoi(int hex_array[]);
+int htoi(char hex_array[]);
 
 int main() {
-	int hex_array[HEX_LEN] = "0x1f9b67dd";
+	char hex_array[HEX_LEN] = "0x1f9b67dd";
 	int result;
 
 	result = htoi(hex_array);
@@ -18,8 +18,8 @@ int main() {
 	return 0;
 }
 
-int htoi(int hex_array[]) {
-	int i, c;
+int htoi(char hex_array[]) {
+	int i, c, integer;
 
 	for (i = 0; i < HEX_LEN; ++i) {
 		c = hex_array[i];
@@ -31,4 +31,5 @@ int htoi(int hex_array[]) {
 			// insert conversoion logic here
 		}
 	}
+	return integer;
 }
