@@ -10,8 +10,11 @@
 int htoi(char hex_array[]);
 
 int main() {
-	char hex_array[HEX_LEN] = "\0\0\0\0\0\0\0\0\0\0";
+	char hex_array[HEX_LEN];
 	int i, c, result;
+
+	for (i = 0; i < HEX_LEN; ++i)
+		hex_array[i] = '\0';
 
 	printf("Enter a 4-byte hex number (0x optional): ");
 	for (i = 0; (c = getchar()) != '\n' && i < HEX_LEN - 1; ++i)
