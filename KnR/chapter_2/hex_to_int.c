@@ -10,12 +10,20 @@
 int htoi(char hex_array[]);
 
 int main() {
-	char hex_array[HEX_LEN] = "0x1f9b67dd";
-	int result;
+	char hex_array[HEX_LEN] = "\0\0\0\0\0\0\0\0\0\0";
+	int i, c, result;
+
+	printf("Enter a 4-byte hex number (0x optional): ");
+	for (i = 0; (c = getchar()) != '\n' && i < HEX_LEN - 1; ++i)
+		hex_array[i] = c;
 
 	result = htoi(hex_array);
-	printf("original hex: %s\n", hex_array);
-	printf("convert to int: %d\n", result);
+	if (result == -1)
+		printf("Invalid Entry\n");
+	else {
+		printf("original hex: %s\n", hex_array);
+		printf("convert to dec: %d\n", result);
+	}
 	return 0;
 }
 
@@ -26,23 +34,22 @@ int htoi(char hex_array[]) {
 
 	for (i = HEX_LEN - 2; i >= 0; --i) {
 		c = hex_array[i];
-		// printf("c: %c\n", c);
-		if (c == 0 && i == 0)
-			;
-		else if (c == 'x' || c == 'X')
-			;
-		else {
-			if ('0' <= c && c <= '9')
+		if (counter < 8) { // 8, as in, 4-bytes in hex
+			if ('0' <= c && c <= '9') {
 				dec_value = c - '0';
-			else if ('a' <= c && c <= 'f')
+				++counter;
+			} else if ('a' <= c && c <= 'f') {
 				dec_value = c - 'a' + 10;
-			else if ('A' <= c && c <= 'F')
+				++counter;
+			} else if ('A' <= c && c <= 'F') {
 				dec_value = c - 'A' + 10;
+				++counter;
+			} else if (c == '\0')
+				;
 			else
 				return -1;
-			total += dec_value * pow((double)base, (double)counter);
-			// printf("total: %d\n", total);
-			++counter;
+			total +=
+			    dec_value * pow((double)base, (double)counter - 1);
 		}
 	}
 	return total;
