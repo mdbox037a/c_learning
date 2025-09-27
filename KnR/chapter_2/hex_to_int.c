@@ -16,6 +16,7 @@ int main() {
 	for (i = 0; i < HEX_LEN; ++i)
 		hex_array[i] = '\0';
 
+	printf("size of an int on this system: %zu\n", sizeof(int));
 	printf("Enter a 4-byte hex number (0x optional): ");
 	for (i = 0; (c = getchar()) != '\n' && i < HEX_LEN - 1; ++i)
 		hex_array[i] = c;
