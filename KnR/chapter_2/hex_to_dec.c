@@ -3,20 +3,21 @@
  * The allowable digits are 0 though 9, a through f, and A through F */
 
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #define HEX_LEN 11
 
-int htoi(char hex_array[]);
+long htoi(char hex_array[]);
 
 int main() {
 	char hex_array[HEX_LEN];
-	int i, c, result;
+	int i, c;
+	long result;
 
 	for (i = 0; i < HEX_LEN; ++i)
 		hex_array[i] = '\0';
 
-	printf("size of an int on this system: %zu\n", sizeof(int));
 	printf("Enter a 4-byte hex number (0x optional): ");
 	for (i = 0; (c = getchar()) != '\n' && i < HEX_LEN - 1; ++i)
 		hex_array[i] = c;
@@ -26,13 +27,14 @@ int main() {
 		printf("Invalid Entry\n");
 	else {
 		printf("original hex: %s\n", hex_array);
-		printf("convert to dec: %d\n", result);
+		printf("convert to dec: %ld\n", result);
 	}
 	return 0;
 }
 
-int htoi(char hex_array[]) {
-	int i, c, counter, base, dec_value, total;
+long htoi(char hex_array[]) {
+	int i, c, counter, base;
+	long total, dec_value;
 	counter = total = 0;
 	base = 16;
 
