@@ -2,12 +2,29 @@
  * each character in s1 that matches any character in the string s2 */
 
 #include <stdio.h>
+#define MAX_STR_LEN 100
 
 void anti_string(char s1[], char s2[]);
 
 int main() {
-	;
-	// input and call function logic here
+	char c, s1[MAX_STR_LEN], s2[MAX_STR_LEN];
+	int i;
+
+	printf("Input original string: ");
+	for (i = 0; (c = getchar()) != '\n' && i < MAX_STR_LEN - 1; ++i) {
+		s1[i] = c;
+	}
+	s1[++i] = '\0';
+
+	printf("Input filter string: ");
+	for (i = 0; (c = getchar()) != '\n' && i < MAX_STR_LEN - 1; ++i) {
+		s2[i] = c;
+	}
+	s2[++i] = '\0';
+
+	anti_string(s1, s2);
+	printf("Resulting string: %s\n", s1);
+	return 0;
 }
 
 void anti_string(char s1[], char s2[]) {
