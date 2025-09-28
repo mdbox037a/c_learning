@@ -34,6 +34,7 @@ void anti_string(char s1[], char s2[]) {
 		for (j = 0; s2[j] != '\0'; ++j) {
 			if (s1[i] == s2[j]) {
 				s1[i] = '\a';
+				// TODO: implement a less duct tapey solution
 			}
 		}
 	}
