@@ -15,3 +15,34 @@ unsigned setbits(unsigned x, int p, int n, unsigned y) {
 /* Exercise 2-7: Write a function invert(x, p, n) that returns x with the n
  * bits that begin at position p inverted (i.e. 1 changed to 0 and vice versa)
  * leaving the others unchanged */
+
+/* x: 00110101
+ * p: 3
+ * n: 2
+ * expected result: 00101101
+ *
+ * orig: 00110101
+ *
+ * >> p: 00000110
+ * mask: 00000011 <-- create with ~(~0 << n)
+ * :     00000010
+ * mask: 00000011 <-- same mask
+ * xor:  00000001
+ * << p: 00001000 <-- result1
+ *
+ * orig: 00110101
+ *
+ * mask: 00000011 <-- size of n
+ * << p: 00011000
+ * not:  11100111
+ * & x:  00100101 <-- result2
+ *
+ * result1 | result2
+ * */
+
+unsigned invert(unsigned x, int p, int n) {
+	return ((((x >> p) & (~(~0 << n))) ^ (~(~0 << n))) << p) |
+	       ((~((~(~0 << n)) << p)) & x);
+}
+
+// obviously the above was bad, but is p here supposed to be left or rightmost?
