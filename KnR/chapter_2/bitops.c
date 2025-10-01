@@ -41,8 +41,10 @@ unsigned setbits(unsigned x, int p, int n, unsigned y) {
  * */
 
 unsigned invert(unsigned x, int p, int n) {
-	return ((((x >> p) & (~(~0 << n))) ^ (~(~0 << n))) << p) |
-	       ((~((~(~0 << n)) << p)) & x);
-}
+	// return ((((x >> p) & (~(~0 << n))) ^ (~(~0 << n))) << p) |
+	//       ((~((~(~0 << n)) << p)) & x);
+	// obviously the above was bad, but is p here supposed to be left or
+	// rightmost?
 
-// obviously the above was bad, but is p here supposed to be left or rightmost?
+	return x ^ ((~(~0 << n)) << (p + 1 - n));
+}
