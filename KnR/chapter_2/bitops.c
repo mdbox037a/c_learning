@@ -24,3 +24,12 @@ unsigned invert(unsigned x, int p, int n) {
 
 	return x ^ ((~(~0 << n)) << (p + 1 - n));
 }
+
+/* Exercise 2-8: Write a function rightrot(x,n) that returns the value of the
+ * integer x rotated to the right by n positions */
+
+unsigned rightrot(unsigned x, int n) {
+	// insert logic here
+	;
+	return 0;
+}
