@@ -1,3 +1,6 @@
+#include <limits.h>
+#include <stdio.h>
+
 /* getbits: get n bits from position p */
 unsigned getbits(unsigned x, int p, int n) {
 	return (x >> (p + 1 - n)) & ~(~0 << n);
@@ -30,6 +33,8 @@ unsigned invert(unsigned x, int p, int n) {
 
 unsigned rightrot(unsigned x, int n) {
 	// insert logic here
-	;
-	return 0;
+	for (int i = 0; i < n; ++i) {
+		x = ((x & 1) << (sizeof(unsigned) * CHAR_BIT - 1)) | (x >> 1);
+	}
+	return x;
 }
