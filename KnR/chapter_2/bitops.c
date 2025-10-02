@@ -32,9 +32,13 @@ unsigned invert(unsigned x, int p, int n) {
  * integer x rotated to the right by n positions */
 
 unsigned rightrot(unsigned x, int n) {
-	// insert logic here
-	for (int i = 0; i < n; ++i) {
-		x = ((x & 1) << (sizeof(unsigned) * CHAR_BIT - 1)) | (x >> 1);
-	}
-	return x;
+	// my original solution
+	// for (int i = 0; i < n; ++i) {
+	//	x = ((x & 1) << (sizeof(unsigned) * CHAR_BIT - 1)) | (x >> 1);
+	//}
+	// return x
+
+	// better solution
+	int word_length = sizeof(unsigned) * CHAR_BIT;
+	return (x >> n) | (x << (word_length - n));
 }
