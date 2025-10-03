@@ -26,3 +26,9 @@ int faster_bitcount(unsigned x) {
 		b++;
 	return b;
 }
+
+/* this version only trimmed three lines of assembly, which doesn't seem like
+ * much of a victory. but note that this version only loops the number of
+ * times equal to the number of 1s in the number. the previous function will
+ * loop once for every place in the number, 0 or 1, so the second function is
+ * always faster, which the one exception of all 1s, where it ties. */
