@@ -21,9 +21,8 @@ int bitcount(unsigned x) {
  * in that very position, once we AND with x, we guarantee a resulting 0 */
 
 int faster_bitcount(unsigned x) {
-	int b = 0;
-
-	while ((x &= (x - 1)) > 0)
+	int b;
+	for (b = 0; x != 0; x &= (x - 1))
 		b++;
 	return b;
 }
