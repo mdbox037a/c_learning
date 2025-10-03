@@ -22,5 +22,8 @@ int bitcount(unsigned x) {
 
 int faster_bitcount(unsigned x) {
 	int b;
+
+	if (x &= (x - 1) > 0)
+		b++;
 	return b;
 }
