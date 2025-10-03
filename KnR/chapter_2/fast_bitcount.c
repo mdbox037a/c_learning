@@ -15,6 +15,10 @@ int bitcount(unsigned x) {
 }
 
 // faster bitcount()
+// "explain why"
+/* x &= (x -1) always deletes the rightmost 1-bit because that bit has to be
+ * "broken up" in order to create (x - 1).  Since (x - 1) must then have a 0
+ * in that very position, once we AND with x, we guarantee a resulting 0 */
 
 int faster_bitcount(unsigned x) {
 	int b;
