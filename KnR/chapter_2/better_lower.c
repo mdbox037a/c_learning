@@ -12,4 +12,4 @@ int lower(int c) {
 
 // (hopefully) improved
 
-int better_lower(int c) { return c; }
+int better_lower(int c) { return (c >= 'A' && c <= 'Z') ? (c + 'a' - 'A') : c; }
