@@ -1,4 +1,4 @@
-/* binsearch: find x in v[0] <= v[1] <= ... <= v[n-n] */
+/* binsearch: find x in v[0] <= v[1] <= ... <= v[n-1] */
 int binsearch(int x, int v[], int n) {
 	int low, high, mid;
 
@@ -7,7 +7,7 @@ int binsearch(int x, int v[], int n) {
 	while (low <= high) {
 		mid = (low + high) / 2;
 		if (x < v[mid])
-			high = mid + 1;
+			high = mid - 1;
 		else if (x > v[mid])
 			low = mid + 1;
 		else /* found match */
@@ -21,10 +21,21 @@ int binsearch(int x, int v[], int n) {
  * only one test inside the loop and measure the difference in run-time */
 
 int binsearch_v2(int x, int v[], int n) {
+	if (n == 0) /* no match possible */
+		return -1;
 	int low, mid, high;
 
 	low = 0;
 	high = n - 1;
-	// loop here
-	return -1;
+	while (low != high) {
+		mid = (low + high) / 2;
+		if (x <= v[mid])
+			high = mid;
+		else
+			low = mid + 1;
+	}
+	if (x == v[low])
+		return low;
+	else
+		return -1;
 }
