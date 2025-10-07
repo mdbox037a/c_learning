@@ -5,6 +5,8 @@ int main() {
 
 	printf("Think of your question, then enter a number from 1 to 8: ");
 	while ((c = getchar()) != '\n') {
+		// TODO: this setup allows a user to enter multiple numbers and
+		// get multiple answers - fix
 		switch (c) {
 		case '1':
 			printf("Sometimes good, sometimes shit\n");
