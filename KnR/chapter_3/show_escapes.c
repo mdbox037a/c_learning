@@ -4,6 +4,7 @@
  * as well, converting escape sequences into real characters */
 
 #include <stdio.h>
+#define MAX_STR_LEN 100
 
 char escape(char c, char result[]);
 char unescape(char c, char result[]);
@@ -11,7 +12,20 @@ char unescape(char c, char result[]);
 int main() {
 	// function to accept input and store in an array
 	// then display the results
-	char result[4];
+	char result[4], string[MAX_STR_LEN];
+	int c, status;
+
+	printf("Enter a string up to 99 characters long: \n");
+	for (int i = 0; (c = getchar()) != EOF && i < MAX_STR_LEN - 2; ++i) {
+		status = escape(c, result);
+		if (status) {
+			string[i++] = result[0];
+			string[i] = result[1];
+		} else
+			string[i] = c;
+	}
+
+	printf("\nYour string with escape characters displayed: %s\n", string);
 	return 0;
 }
 
