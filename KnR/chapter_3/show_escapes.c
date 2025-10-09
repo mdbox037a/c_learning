@@ -12,35 +12,33 @@ char unescape(char c, char result[]);
 int main() {
 	// function to accept input and store in an array
 	// then display the results
-	char result[4], string[MAX_STR_LEN];
+	char result[4], first_string[MAX_STR_LEN], second_string[MAX_STR_LEN];
 	int i, j, k, c, status;
 
 	printf("Enter a string up to 99 characters long: ");
 	for (int i = 0; (c = getchar()) != EOF && i < MAX_STR_LEN - 2;) {
 		status = escape(c, result);
 		if (status) {
-			string[i++] = result[0];
-			string[i++] = result[1];
+			first_string[i++] = result[0];
+			first_string[i++] = result[1];
 		} else
-			string[i++] = c;
+			first_string[i++] = c;
 	}
 	// string[++i] = '\0';
-	printf("\nYour string with escape characters displayed: %s\n", string);
+	printf("\nYour string with escape characters displayed: %s\n",
+	       first_string);
 
-	// clear string contents
-	for (j = 0; j < MAX_STR_LEN - 1; ++j)
-		string[j] = '\0';
-
+	// TODO: determine why below never starts
 	printf("Now enter a string with some written newlines and tabs: ");
 	for (int k = 0; (c = getchar()) != EOF && k < MAX_STR_LEN - 1; ++k) {
 		status = unescape(c, result);
 		if (status)
-			string[k] = result[0];
+			second_string[k] = result[0];
 		else
-			string[k] = c;
+			second_string[k] = c;
 	}
-	string[k] = '\0';
-	printf("\nYour string with no escapes: %s\n", string);
+	second_string[k] = '\0';
+	printf("\nYour string with no escapes: %s\n", second_string);
 
 	return 0;
 }
@@ -61,7 +59,7 @@ char escape(char c, char result[4]) {
 		return 0;
 	}
 }
-
+// TODO: complete logic to handle 2nd character
 char unescape(char c, char result[4]) {
 	// function to take a character from main() and if an escape character,
 	// return \ such that the end text will display the \n or \t
