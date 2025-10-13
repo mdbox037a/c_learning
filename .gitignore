@@ -1,6 +1,7 @@
 # ignore any files placed in these folders
 binaries/
 testing_inputs/
+.idea/
 
 # ignote files with these extensions
 .clang-format
