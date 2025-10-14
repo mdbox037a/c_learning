@@ -5,7 +5,20 @@
  * leading or trailing - is taken literally */
 
 #include <stdio.h>
-#define MAX_STR_LEN 100
+#define MAX_S1_LEN 100
+#define MAX_S2_LEN 1000
 #define ALPHABET "abcdefghijklmnopqrstuvwxyz"
+#define DIGITS "0123456789"
 
-void expand(char s1[], char s2[]) { int c, i, j; }
+void expand(char s1[], char s2[]) {
+	int c, i, j;
+	char buffer[4] = {0};
+
+	for (i = 1, j = 1; s1[i] != '\0' && j < MAX_S2_LEN - 2; ++i, ++j) {
+		if (s1[i - 1] == 'a' && s1[i] == '-' && s1[i + 1] == 'z') {
+			// TODO: figure out how to copy in multiple chars
+			// starting from array position
+			s2[j - 1] = ALPHABET;
+		}
+	}
+}
