@@ -13,3 +13,6 @@ void expand(char s1[], char s2[]) {
 			s2[j++] = c;
 	s2[j] = '\0';
 }
+
+// TODO: create a main() function to input and test this
+// TODO: see if the leading "-" would still trip up this solution
