@@ -1,4 +1,22 @@
 /* expand: expand shorthand notation in s1 into string s2 */
+#include <stdio.h>
+#define MAX_S1_LEN 50
+#define MAX_S2_len 1000
+
+void expand(char s1[], char s2[]);
+
+int main() {
+	int i, j, c;
+	char s1[MAX_S1_LEN] = "test a-z test\0";
+	char s2[MAX_S2_len];
+
+	expand(s1, s2);
+	printf("s1: %s\n", s1);
+	printf("s2: %s\n", s2);
+
+	return 0;
+}
+
 void expand(char s1[], char s2[]) {
 	char c;
 	int i, j;
