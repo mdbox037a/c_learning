@@ -1,5 +1,27 @@
+#include <stdio.h>
+#define MAX_STR_LEN 100
+
+int itoa(int n, char s[]);
+void reverse(int len, char s[], char r[]);
+
+int main() {
+	int len, c, n;
+	char s[MAX_STR_LEN];
+	char r[MAX_STR_LEN];
+
+	n = 123;
+	len = itoa(n, s);
+	printf("n: %d\n", n);
+	printf("s: %s\n", s);
+
+	reverse(len, s, r);
+	printf("r: %s\n", r);
+
+	return 0;
+}
+
 /* itoa: convert n to characters in s */
-void itoa(int n, char s[]) {
+int itoa(int n, char s[]) {
 	int i, sign;
 
 	if ((sign = n) < 0) // record sign
@@ -11,5 +33,12 @@ void itoa(int n, char s[]) {
 	if (sign < 0)
 		s[i++] = '-';
 	s[i] = '\0';
-	// reverse(s);
+	return i;
+}
+
+void reverse(int len, char s[], char r[]) {
+	int i, j;
+	for (i = 0, j = len - 1; i < len; i++, j--)
+		r[j] = s[i];
+	r[len] = '\0';
 }
