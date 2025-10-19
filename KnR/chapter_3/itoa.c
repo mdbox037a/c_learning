@@ -1,13 +1,13 @@
 #include <stdio.h>
-#define MAX_STR_LEN 100
+#define MAX_LEN 100
 
 int itoa(int n, char s[]);
 void reverse(int len, char s[], char r[]);
 
 int main() {
 	int len, c, n;
-	char s[MAX_STR_LEN];
-	char r[MAX_STR_LEN];
+	char s[MAX_LEN];
+	char r[MAX_LEN];
 
 	n = 123;
 	len = itoa(n, s);
