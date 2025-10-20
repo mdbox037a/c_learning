@@ -9,7 +9,10 @@ int main() {
 	printf("Try to guess it: ");
 	scanf("%d", &guess);
 
-	// Write a while loop here:
+	while (guess != 8) {
+		printf("Wrong!  Try again? ");
+		scanf("%d", &guess);
+	}
 
 	if (guess == 8) {
 		printf("You got it!\n");
