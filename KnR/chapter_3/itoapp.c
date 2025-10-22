@@ -5,10 +5,14 @@
 
 /* Explanation: In two's complement, there is only one zero, represented by
  * 00000000 (for example). So 100000000 isn't used for "negative zero",
- * instead it is used for one more negative number, -128 (or whatever).  Thus
- * when the previous version of -128 gets turned into +128, it overflows. */
+ * instead it is the next lowest negative number, -128 (or whatever), which
+ * has overflown. When -128 gets turned into +128:
+ * 10000000 --> [invert] 01111111 --> [add 1] --> 10000000
+ * it remains -128.  In my solution, I employ abs() to get around INT_MIN */
 
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX_LEN 100
 
 int itoa(int n, char s[]);
@@ -19,8 +23,10 @@ int main() {
 	char s[MAX_LEN];
 	char r[MAX_LEN];
 
-	n = 123;
+	n = INT_MIN;
 	len = itoa(n, s);
+	printf("int min: %d\n", INT_MIN);
+	printf("int max: %d\n", INT_MAX);
 	printf("n: %d\n", n);
 	printf("s: %s\n", s);
 
@@ -34,12 +40,11 @@ int main() {
 int itoa(int n, char s[]) {
 	int i, sign;
 
-	if ((sign = n) < 0) // record sign
-		n = -n;     // make n positive
+	sign = n;
 	i = 0;
-	do {                           // generate digits in reverse order
-		s[i++] = n % 10 + '0'; // get next digit
-	} while ((n /= 10) > 0); // delete it
+	do {                                // generate digits in reverse order
+		s[i++] = abs(n % 10) + '0'; // abs() to deal with negatives
+	} while (abs(n /= 10) > 0); // delete one tens place
 	if (sign < 0)
 		s[i++] = '-';
 	s[i] = '\0';
