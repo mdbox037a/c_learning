@@ -15,8 +15,8 @@ int main() {
 	char s[MAX_LEN];
 	char r[MAX_LEN];
 
-	n = 10;
-	b = 2;
+	n = 64;
+	b = 2; // TODO: implement only bases 1, 2, 3, 8, 10, 12, and 16
 	len = itob(n, s, b);
 	printf("n: %d\n", n);
 	printf("s: %s\n", s);
@@ -30,11 +30,13 @@ int main() {
 
 /* itob: convert n to characters in s, in base b */
 // TODO: continue mods to have base flexibility
-int itoa(int n, char s[]) {
+int itoa(int n, char s[], int b) {
 	int i, sign;
 
 	sign = n;
 	i = 0;
+
+	// for case b = 10:
 	do {
 		s[i++] = abs(n % 10) + '0';
 	} while (abs(n /= 10) > 0);
