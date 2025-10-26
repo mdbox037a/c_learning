@@ -16,11 +16,12 @@ int main() {
 	char s[MAX_LEN];
 	char r[MAX_LEN];
 
-	n = INT_MIN;
+	n = 100;
 	w = 16;
 	len = itoa(n, s, w);
 	printf("n: %d\n", n);
 	printf("s: %s\n", s);
+	printf("w: %d\n", w);
 
 	reverse(len, s, r);
 	printf("r: %s\n", r);
@@ -30,16 +31,21 @@ int main() {
 
 /* itoa: convert n to characters in s */
 int itoa(int n, char s[], int w) {
-	int i, sign;
+	int i, sign, buffer;
 
 	sign = n;
 	i = 0;
-	do {                                // generate digits in reverse order
-		s[i++] = abs(n % 10) + '0'; // abs() to deal with negatives
-	} while (abs(n /= 10) > 0); // delete one tens place
+	do {
+		s[i++] = abs(n % 10) + '0';
+	} while (abs(n /= 10) > 0);
 	if (sign < 0)
 		s[i++] = '-';
+	// add field width buffer logic here
+	while (i < w)
+		s[i++] = ' ';
+	// then terminate string
 	s[i] = '\0';
+
 	return i;
 }
 
