@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #define MAXLINE 1000
 
 int mini_getline(char line[], int max);
@@ -40,11 +41,12 @@ int mini_getline(char s[], int lim) {
 int strindex(char s[], char t[], int str_len) {
 	int i, j, k;
 	// TODO: implement right-start, using string length
-	for (i = 0; s[i] != '\0'; i++) {
-		for (j = i, k = 0; t[k] != '\0' && s[j] == t[k]; j++, k++)
+	for (i = str_len - 1; i != 0; i--) {
+		for (j = i, k = (strlen(t) - 1); k != 0 && s[j] == t[k];
+		     j--, k--)
 			;
-		if (k > 0 && t[k] == '\0')
-			return i;
+		if (k == 0)
+			return i + 1; // TODO: this is dumb
 	}
 	return -1;
 }
