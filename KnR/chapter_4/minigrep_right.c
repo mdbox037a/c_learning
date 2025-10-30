@@ -3,7 +3,7 @@
 #define MAXLINE 1000
 
 int mini_getline(char line[], int max);
-int strindex(char source[], char searchfor[], int str_len);
+int strindex(char source[], char searchfor[]);
 
 char pattern[] = "ould";
 
@@ -13,9 +13,9 @@ int main() {
 	int found = 0;
 	int str_len = 0;
 
-	str_len = mini_getline(line, MAXLINE);
-	while (str_len > 0)
-		if (strindex(line, pattern, str_len) >= 0) {
+	// str_len = mini_getline(line, MAXLINE);
+	while (mini_getline(line, MAXLINE) > 0)
+		if (strindex(line, pattern) >= 0) {
 			printf("%s", line);
 			found++;
 		}
@@ -38,11 +38,11 @@ int mini_getline(char s[], int lim) {
 }
 
 /* strindex: return index of t in s, -1 if none */
-int strindex(char s[], char t[], int str_len) {
+int strindex(char s[], char t[]) {
 	int i, j, k;
 	// TODO: implement right-start, using string length
-	for (i = str_len - 1; i != 0; i--) {
-		for (j = i, k = (strlen(t) - 1); k != 0 && s[j] == t[k];
+	for (i = strlen(s) - 2; i != 0; i--) {
+		for (j = i, k = (strlen(t) - 2); k != 0 && s[j] == t[k];
 		     j--, k--)
 			;
 		if (k == 0)
