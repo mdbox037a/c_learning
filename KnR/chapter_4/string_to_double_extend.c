@@ -1,8 +1,10 @@
 #include <ctype.h>
+#include <math.h>
 
+// TODO: implement main() in order to compile and test
 /* atof: convert string s to double */
 double atof(char s[]) {
-	double val, power, e, esign;
+	double val, power, e, esign, eval;
 	int i, sign;
 
 	for (i = 0; isspace(s[i]); i++) // skip whitespace
@@ -27,10 +29,12 @@ double atof(char s[]) {
 		            ? -1
 		            : 1; // TODO: actually, maybe something smarter like
 		                 // * or /, depending on sign...
-		for (e = 1.0; isdigit(s[i]); i++) {
+		for (e = 1.0, eval = 0; isdigit(s[i]); i++) {
 			// TODO: implement logic
-			;
+			eval *= e;
+			eval = eval + (s[i] - '0');
+			e *= 10;
 		}
 	}
-	return sign * val / power;
+	return (sign * val / power) * (pow(eval, esign));
 }
