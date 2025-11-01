@@ -23,7 +23,10 @@ double atof(char s[]) {
 	// PLANNING: then tack on to original return
 	if (s[i] == 'e' || s[i] == 'E') {
 		i++;
-		esign = (s[i] == '-') ? -1 : 1;
+		esign = (s[i] == '-')
+		            ? -1
+		            : 1; // TODO: actually, maybe something smarter like
+		                 // * or /, depending on sign...
 		for (e = 1.0; isdigit(s[i]); i++) {
 			// TODO: implement logic
 			;
