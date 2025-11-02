@@ -1,7 +1,24 @@
 #include <ctype.h>
 #include <math.h>
+#include <stdio.h>
+#define MAX_LEN 21
 
 // TODO: implement main() in order to compile and test
+
+double atof(char s[]);
+
+int main() {
+	char s[MAX_LEN];
+	double result;
+
+	printf("Enter a number (max 20 chars): ");
+	scanf("%s", s);
+	result = atof(s);
+	printf("%f\n", result);
+
+	return 0;
+}
+
 /* atof: convert string s to double */
 double atof(char s[]) {
 	double val, power, e, esign, eval;
