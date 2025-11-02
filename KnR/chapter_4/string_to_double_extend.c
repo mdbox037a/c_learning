@@ -37,21 +37,17 @@ double atof(char s[]) {
 		val = 10.0 * val + (s[i] - '0');
 		power *= 10;
 	}
-	// TODO: implement scientific notation handler
-	// PLANNING: construct multiplier with correct number of zeroes
-	// PLANNING: then tack on to original return
 	if (s[i] == 'e' || s[i] == 'E') {
 		i++;
-		esign = (s[i] == '-')
-		            ? -1
-		            : 1; // TODO: actually, maybe something smarter like
-		                 // * or /, depending on sign...
+		esign = (s[i] == '-') ? -1 : 1;
+		if (s[i] == '-')
+			i++;
 		for (e = 1.0, eval = 0; isdigit(s[i]); i++) {
-			// TODO: implement logic
 			eval *= e;
 			eval = eval + (s[i] - '0');
 			e *= 10;
 		}
 	}
-	return (sign * val / power) * (pow(eval, esign));
+	// NOTE: if e-n is greater than 6, double precision will not be enough
+	return (sign * val / power) * (pow(10, (esign * eval)));
 }
