@@ -38,6 +38,7 @@ int main() {
 			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
+			// .8 -> 8 decimal places; g -> shorter of f or e
 			break;
 		default:
 			printf("error: unknown command %s\n", s);
