@@ -47,4 +47,29 @@ int main() {
 	}
 	return 0;
 }
-// TODO: add getop(), push(), and pop()
+// NOTE: push(), and pop()
+
+#define MAXVAL 100
+
+int sp = 0;         // next free stack position
+double val[MAXVAL]; // value stack
+
+/* push: push f onto value stack */
+void push(double f) {
+	if (sp < MAXVAL)
+		val[sp++] = f; // store float at current pos., then ++
+	else
+		printf("error: stack full, can't push %g\n", f);
+}
+
+/* pop: pop and return top value from stack */
+double pop(void) {
+	if (sp > 0)
+		return val[--sp]; // decrement first to get to last item
+	else {
+		printf("error: stack empty\n");
+		return 0.0;
+	}
+}
+
+// TODO: add getop()
