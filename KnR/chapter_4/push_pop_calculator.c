@@ -14,6 +14,9 @@ int main() {
 	double op2;
 	char s[MAXOP];
 
+	// very cool - user input isn't into getch(), multiple levels down
+	// the planning tree for this program; if it were me, I'd be trying
+	// to get user input quickly, somewhere just below, but KnR aren't me
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
