@@ -103,11 +103,14 @@ int getop(char s[], int sign) {
 	s[1] = '\0';
 	if (!isdigit(c) && c != '.' && c != '-')
 		return c;
-	// TODO: fix some infinite loop happening here
+	// TODO: resolve 'stack empty' error happening here
 	if (c == '-') {
 		ungetch(c);
-		if (isdigit(c = getch()))
+		c = getch();
+		if (isdigit(c))
 			sign = -1;
+		else
+			return '-';
 	}
 	i = 0;
 	if (isdigit(c))
