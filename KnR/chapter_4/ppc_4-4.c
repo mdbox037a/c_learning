@@ -17,7 +17,7 @@ void clear(void);
 /* reverse Polish calculator */
 int main() {
 	int type;
-	double op2;
+	double op1, op2;
 	char s[MAXOP];
 
 	printf("commands: ? print top; & dup top; $ clear stack\n");
@@ -58,6 +58,12 @@ int main() {
 		case '&':
 			op2 = pop();
 			push(op2);
+			push(op2);
+			break;
+		case '~':
+			op1 = pop();
+			op2 = pop();
+			push(op1);
 			push(op2);
 			break;
 		case '$':
