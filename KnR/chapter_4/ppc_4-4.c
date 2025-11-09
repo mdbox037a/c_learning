@@ -19,6 +19,7 @@ int main() {
 	double op2;
 	char s[MAXOP];
 
+	printf("commands: ? print top; & dup top; $ clear stack\n");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
@@ -51,6 +52,11 @@ int main() {
 		case '?':
 			op2 = pop();
 			printf("\t%.8g\n", op2);
+			push(op2);
+			break;
+		case '&':
+			op2 = pop();
+			push(op2);
 			push(op2);
 			break;
 		case '\n':
