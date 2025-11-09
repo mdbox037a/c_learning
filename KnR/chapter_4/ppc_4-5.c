@@ -73,6 +73,9 @@ int main() {
 			// should there be error checking here? (1 arg only)
 			push(sin(pop()));
 			break;
+		case 'E':
+			push(exp(pop()));
+			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
 			// .8 -> 8 decimal places; g -> shorter of f or e
