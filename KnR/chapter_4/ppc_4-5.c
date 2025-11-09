@@ -19,7 +19,8 @@ int main() {
 	double op1, op2;
 	char s[MAXOP];
 
-	printf("commands: ? print top; & dup top; ~ swap; $ clear stack\n");
+	printf("commands: ? print top; & dup top; @ swap; $ clear stack\n");
+	printf("math.h ops: ~ sine; E exp (Euler); ^ power\n");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
@@ -59,7 +60,7 @@ int main() {
 			push(op2);
 			push(op2);
 			break;
-		case '~':
+		case '@':
 			op1 = pop();
 			op2 = pop();
 			push(op1);
@@ -67,6 +68,10 @@ int main() {
 			break;
 		case '$':
 			clear();
+			break;
+		case '~':
+			// should there be error checking here? (1 arg only)
+			push(sin(pop()));
 			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
