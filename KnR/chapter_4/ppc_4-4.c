@@ -12,6 +12,7 @@
 int getop(char[]);
 void push(double);
 double pop(void);
+void clear(void);
 
 /* reverse Polish calculator */
 int main() {
@@ -59,6 +60,9 @@ int main() {
 			push(op2);
 			push(op2);
 			break;
+		case '$':
+			clear();
+			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
 			// .8 -> 8 decimal places; g -> shorter of f or e
@@ -70,7 +74,7 @@ int main() {
 	}
 	return 0;
 }
-// NOTE: push(), and pop()
+// NOTE: push(), pop(), and clear()
 
 #define MAXVAL 100
 
@@ -89,12 +93,14 @@ void push(double f) {
 /* pop: pop and return top value from stack */
 double pop(void) {
 	if (sp > 0)
-		return val[--sp]; // decrement first to get to last item
+		return val[--sp]; // decrement first to get previous item
 	else {
 		printf("error: stack empty\n");
 		return 0.0;
 	}
 }
+
+void clear(void) { sp = 0; }
 
 // NOTE: getop()
 
