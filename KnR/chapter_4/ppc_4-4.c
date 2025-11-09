@@ -20,7 +20,7 @@ int main() {
 	double op1, op2;
 	char s[MAXOP];
 
-	printf("commands: ? print top; & dup top; $ clear stack\n");
+	printf("commands: ? print top; & dup top; ~ swap; $ clear stack\n");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
