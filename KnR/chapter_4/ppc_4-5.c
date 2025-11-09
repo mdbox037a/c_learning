@@ -76,6 +76,10 @@ int main() {
 		case 'E':
 			push(exp(pop()));
 			break;
+		case '^':
+			op2 = pop();
+			push(pow(pop(), op2));
+			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
 			// .8 -> 8 decimal places; g -> shorter of f or e
