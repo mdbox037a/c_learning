@@ -30,7 +30,7 @@ int main() {
 
 	printf("commands: ? print top; & dup top; @ swap; $ clear stack\n");
 	printf("math.h ops: ~ sine; E exp (Euler); ^ power\n");
-	printf("variables - single, lower case letters only; num then var\n");
+	printf("variables - single, lower case letters only; = set; ! unset\n");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
@@ -97,18 +97,25 @@ int main() {
 		case '=':
 			// set variable to value
 			op2 = pop();
-			values[(char)pop() - 'a'] = op2;
+			op1 = pop();
+			values[(char)op1 - 'a'] = op2;
+			vars[(char)op1 - 'a'] = 1;
 			push(op2);
 			break;
 		// TODO: add logic to unset a variable
+		case '!':
+			// unset variable by indicating non-value in tracking
+			// array
+			vars[(char)pop() - 'a'] = 0;
+			push(0);
+			break;
 		default:
 			if (islower(type)) {
 				if (vars[type - 'a'] == 1)
 					push(values[type - 'a']);
-				else {
+				// TODO: error handle here
+				else
 					push(type);
-					vars[type - 'a'] = 1;
-				}
 				break;
 			} else {
 				printf("error: unknown command %s\n", s);
