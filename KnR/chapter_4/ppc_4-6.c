@@ -9,6 +9,7 @@
 #define MAXOP 100 // max size of operand or operator
 #define NUMBER '0'
 #define VARIABLE '1'
+#define NUM_VARS 26
 
 int getop(char s[]);
 void push(double);
@@ -21,9 +22,9 @@ int main() {
 	double op1, op2;
 	char s[MAXOP];
 
-	int vars[26];
-	int values[26];
-	for (i = 0; i < 26; i++) {
+	int vars[NUM_VARS];
+	int values[NUM_VARS];
+	for (i = 0; i < NUM_VARS; i++) {
 		vars[i] = 0;
 		values[i] = 0;
 	}
@@ -31,6 +32,7 @@ int main() {
 	printf("commands: ? print top; & dup top; @ swap; $ clear stack\n");
 	printf("math.h ops: ~ sine; E exp (Euler); ^ power\n");
 	printf("variables - single, lower case letters only; = set; ! unset\n");
+	printf("var z is special: always holds the last answer printed");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
@@ -91,8 +93,12 @@ int main() {
 			push(pow(pop(), op2));
 			break;
 		case '\n':
-			printf("\t%.8g\n", pop());
+			values['z' - 'a'] = op2 = pop();
+			printf("\t%.8g\n", op2);
 			// .8 -> 8 decimal places; g -> shorter of f or e
+			break;
+		case 'z':
+			push(values['z' - 'a']);
 			break;
 		case '=':
 			// set variable to value
@@ -102,7 +108,7 @@ int main() {
 			vars[(char)op1 - 'a'] = 1;
 			push(op2);
 			break;
-		// TODO: add logic to unset a variable
+		// TODO: resolve failure to clear variable values once set
 		case '!':
 			// unset variable by indicating non-value in tracking
 			// array
@@ -113,7 +119,6 @@ int main() {
 			if (islower(type)) {
 				if (vars[type - 'a'] == 1)
 					push(values[type - 'a']);
-				// TODO: error handle here
 				else
 					push(type);
 				break;
