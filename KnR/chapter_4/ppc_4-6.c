@@ -32,7 +32,7 @@ int main() {
 	printf("commands: ? print top; & dup top; @ swap; $ clear stack\n");
 	printf("math.h ops: ~ sine; E exp (Euler); ^ power\n");
 	printf("variables - single, lower case letters only; = set; ! unset\n");
-	printf("var z is special: always holds the last answer printed");
+	printf("var z is special: always holds the last answer printed\n");
 	while ((type = getop(s)) != EOF) {
 		switch (type) {
 		case NUMBER:
@@ -108,7 +108,6 @@ int main() {
 			vars[(char)op1 - 'a'] = 1;
 			push(op2);
 			break;
-		// TODO: resolve failure to clear variable values once set
 		case '!':
 			// unset variable by indicating non-value in tracking
 			// array
