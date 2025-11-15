@@ -6,6 +6,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h> // to get atof()
+#include <string.h>
 
 #define MAXOP 100 // max size of operand or operator
 #define NUMBER '0'
@@ -16,6 +17,7 @@ int getop(char s[]);
 void push(double);
 double pop(void);
 void clear(void);
+void ungets(char s[]);
 
 /* reverse Polish calculator */
 int main() {
@@ -211,4 +213,11 @@ void ungetch(int c) {
 		printf("ungetch: too many characters\n");
 	else
 		buf[bufp++] = c;
+}
+
+void ungets(char s[]) {
+	int length = strlen(s);
+
+	while (length > 0)
+		ungetch(s[--length]);
 }
