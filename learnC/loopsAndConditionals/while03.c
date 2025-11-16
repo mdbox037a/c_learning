@@ -2,13 +2,13 @@
 
 int main() {
 
-	int i = 0;
+	int i = 9;
 	int square = 0;
 
 	// Write a while loop here:
-	while (i < 10) {
+	while (i >= 0) {
 		square = i * i;
 		printf("%d\t%d\n", i, square);
-		i++;
+		i--;
 	}
 }
