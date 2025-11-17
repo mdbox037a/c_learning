@@ -17,4 +17,15 @@ int main() {
 		numbers_entered1++;
 	}
 	printf("Good job! You’ve broken out!\n");
+
+	int number2 = 1;
+	int numbers_entered2 = 0;
+
+	while (number2 > 0 && numbers_entered2 < 10) {
+
+		printf("Loop 1 - Please enter a number: ");
+		scanf("%d", &number1);
+		numbers_entered1++;
+	}
+	printf("Good job! You’ve broken out!\n");
 }
