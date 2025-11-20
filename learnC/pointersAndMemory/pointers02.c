@@ -6,9 +6,6 @@ int main() {
 	double pi = 3.14;
 
 	// Checkpoint 1 code goes here.
-	double *dblPtr = &g;
 	// Checkpoint 2 code goes here.
-	printf("%p", dblPtr);
 	// Checkpoint 3 code goes here.
-	dblPtr = &pi;
 }
