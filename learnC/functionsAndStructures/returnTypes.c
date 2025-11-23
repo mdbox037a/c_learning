@@ -3,11 +3,14 @@
 #include <time.h>
 
 // Modify the code below
-void getRandom1000() { int random1000 = rand() % 1000 + 1; }
+int getRandom1000() {
+	int random1000 = rand() % 1000 + 1;
+	return random1000;
+}
 
 int main(void) {
 	srand(time(NULL));
 	// Modify the code below
-	int randomNumber = 0;
+	int randomNumber = getRandom1000();
 	printf("My random number is: %d", randomNumber);
 }
