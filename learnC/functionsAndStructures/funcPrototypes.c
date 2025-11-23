@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+void repeatDigit(int repetitions);
+int getRandomNumber(int maxNumber);
+
 // Define prototypes above
 // the function definitions
 void repeatDigit(int repetitions) {
@@ -22,3 +25,4 @@ int main(void) {
 	int repetitions = getRandomNumber(10);
 	repeatDigit(repetitions);
 }
+
