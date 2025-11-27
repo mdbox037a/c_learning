@@ -198,20 +198,26 @@ int getop(char s[]) {
 	return NUMBER;
 }
 
-// NOTE: getch() and ungetch()
+// NOTE: getch() and ungetch(); now modified to track just one char at a time
 
-#define BUFSIZE 100
+int buf = '\0'; // buffer for ungetch
+int buf_flag = 0;
 
-char buf[BUFSIZE]; // buffer for ungetch
-int bufp = 0;      // next free position in buf
-
-int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
+int getch(void) {
+	if (buf_flag == 1) {
+		buf_flag = 0;
+		return buf;
+	} else
+		return getchar();
+}
 
 void ungetch(int c) {
-	if (bufp >= BUFSIZE)
+	if (buf_flag == 1)
 		printf("ungetch: too many characters\n");
-	else
-		buf[bufp++] = c;
+	else if (buf_flag == 0) {
+		buf = c;
+		buf_flag = 1;
+	}
 }
 
 void ungets(char s[]) {
