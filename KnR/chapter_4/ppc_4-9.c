@@ -1,5 +1,5 @@
 /* Exercise 4-9: Our getch() and ungetch() do not handle a pushed-back EOF
- * correctly.  Decide what their properties ought to be if an EOF is pushed
+ * correctly. Decide what their properties ought to be if an EOF is pushed
  * back, then implement your design */
 
 #include <ctype.h>
@@ -199,30 +199,20 @@ int getop(char s[]) {
 	return NUMBER;
 }
 
-// NOTE: getch() and ungetch(); now modified to track just one char at a time
+// NOTE: getch() and ungetch()
 
-int buf = '\0'; // buffer for ungetch
-int buf_flag = 0;
+#define BUFSIZE 100
 
-int getch(void) {
-	if (buf_flag == 1) {
-		buf_flag = 0;
-		return buf;
-	} else
-		return getchar();
-}
+char buf[BUFSIZE]; // buffer for ungetch
+int bufp = 0;      // next free position in buf
+
+int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
 
 void ungetch(int c) {
-	if (buf_flag == 1)
+	if (bufp >= BUFSIZE)
 		printf("ungetch: too many characters\n");
-	else if (buf_flag == 0) {
-		if (c == EOF)
-			return;
-		else {
-			buf = c;
-			buf_flag = 1;
-		}
-	}
+	else
+		buf[bufp++] = c;
 }
 
 void ungets(char s[]) {
