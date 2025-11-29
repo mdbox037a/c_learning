@@ -174,8 +174,8 @@ int getop(char s[]) {
 	char line[MAXOP];
 
 	len = proto_getline(line, MAXOP);
-	for (i = 0; i < len; i++) {
-		;
+	i = 0;
+	while (i < len) {
 		// TODO: use processes below as scaffold for handling input
 		// as we traverse the stored line from proto_getline()
 		// TODO: need special refactoring to handle strings
@@ -183,34 +183,41 @@ int getop(char s[]) {
 		// individual numbers can be sent back and pushed to the stack
 		// once we hit whitespace, but with a return to stored input
 		// string, rather than trying to gather input again
-	}
 
-	while ((s[0] = c = getch()) == ' ' || c == '\t')
-		;
-	s[1] = '\0';
-	if (!isdigit(c) && c != '.' && c != '-')
-		return c;
-	i = 0;
-	if (c == '-') {
-		c = getch();
-		if (isdigit(c) || c == '.') {
-			s[i++] = '-';
-			s[i] = c;
-		} else {
-			ungetch(c);
-			return '-';
+		/* skip opening whitespace */
+		while ((s[0] = line[i]) == ' ' || line[i] == '\t')
+			i++;
+
+		/* catch and return single-char operands */
+		s[1] =
+		    '\0'; // if s[0] was non-digit, it is now stored as string
+		if (!isdigit(line[i]) && line[i] != '.' && line[i] != '-')
+			return line[i];
+
+		/* store numbers in s[] for later processing */
+		j = 0;
+		if (line[i] == '-') {
+			// NOTE: marker for progress stop 29Nov1716
+			c = getch();
+			if (isdigit(c) || c == '.') {
+				s[i++] = '-';
+				s[i] = c;
+			} else {
+				ungetch(c);
+				return '-';
+			}
 		}
+		if (isdigit(c))
+			while (isdigit(s[++i] = c = getch()))
+				;
+		if (c == '.')
+			while (isdigit(s[++i] = c = getch()))
+				;
+		s[i] = '\0';
+		if (c != EOF)
+			ungetch(c);
+		return NUMBER;
 	}
-	if (isdigit(c))
-		while (isdigit(s[++i] = c = getch()))
-			;
-	if (c == '.')
-		while (isdigit(s[++i] = c = getch()))
-			;
-	s[i] = '\0';
-	if (c != EOF)
-		ungetch(c);
-	return NUMBER;
 }
 
 // NOTE: getch() and ungetch()
