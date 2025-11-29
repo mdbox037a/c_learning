@@ -18,6 +18,7 @@ void push(double);
 double pop(void);
 void clear(void);
 void ungets(char s[]);
+int proto_getline(char s[], int lim);
 
 /* reverse Polish calculator */
 int main() {
@@ -169,7 +170,20 @@ void ungetch(int);
 
 /* getop: get next character or numeric operand */
 int getop(char s[]) {
-	int i, j, c;
+	int i, j, c, len;
+	char line[MAXOP];
+
+	len = proto_getline(line, MAXOP);
+	for (i = 0; i < len; i++) {
+		;
+		// TODO: use processes below as scaffold for handling input
+		// as we traverse the stored line from proto_getline()
+		// TODO: need special refactoring to handle strings
+		// TODO: may need to change main() call to getop() so that
+		// individual numbers can be sent back and pushed to the stack
+		// once we hit whitespace, but with a return to stored input
+		// string, rather than trying to gather input again
+	}
 
 	while ((s[0] = c = getch()) == ' ' || c == '\t')
 		;
@@ -224,4 +238,18 @@ void ungets(char s[]) {
 
 	while (length > 0)
 		ungetch(s[--length]);
+}
+
+/* getline: read a line into s, return length */
+int proto_getline(char s[], int lim) {
+	int c, i;
+
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
+		s[i] = c;
+	if (c == '\n') {
+		s[i] = c;
+		++i;
+	}
+	s[i] = '\0';
+	return i;
 }
