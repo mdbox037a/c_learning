@@ -174,16 +174,11 @@ int getop(char s[]) {
 	char line[MAXOP];
 
 	len = proto_getline(line, MAXOP);
+	// TODO: this may have gone way off track at this point - instead of
+	// still returning for each operand in line[], should we just process
+	// the line in main() and case each operand as we go?
 	i = 0;
 	while (i < len) {
-		// TODO: use processes below as scaffold for handling input
-		// as we traverse the stored line from proto_getline()
-		// TODO: need special refactoring to handle strings
-		// TODO: may need to change main() call to getop() so that
-		// individual numbers can be sent back and pushed to the stack
-		// once we hit whitespace, but with a return to stored input
-		// string, rather than trying to gather input again
-
 		/* skip opening whitespace */
 		while ((s[0] = line[i]) == ' ' || line[i] == '\t')
 			i++;
@@ -195,29 +190,24 @@ int getop(char s[]) {
 			return line[i];
 
 		/* store numbers in s[] for later processing */
-		j = 0;
+		j = 1;
 		if (line[i] == '-') {
-			// NOTE: marker for progress stop 29Nov1716
-			c = getch();
-			if (isdigit(c) || c == '.') {
-				s[i++] = '-';
-				s[i] = c;
-			} else {
-				ungetch(c);
+			i++;
+			if (isdigit(line[i]) || line[i] == '.')
+				s[j++] = line[i++];
+			else
 				return '-';
-			}
 		}
-		if (isdigit(c))
-			while (isdigit(s[++i] = c = getch()))
-				;
-		if (c == '.')
-			while (isdigit(s[++i] = c = getch()))
-				;
-		s[i] = '\0';
-		if (c != EOF)
-			ungetch(c);
+		while (isdigit(line[i]))
+			s[j++] = line[i++];
+		if (line[i] == '.')
+			s[j++] = line[i++];
+		while (isdigit(line[i]))
+			s[j++] = line[i++];
+		s[j] = '\0';
 		return NUMBER;
 	}
+	return EOF;
 }
 
 // NOTE: getch() and ungetch()
