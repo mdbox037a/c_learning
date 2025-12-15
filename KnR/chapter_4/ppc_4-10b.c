@@ -22,6 +22,9 @@ void clear(void);
 void ungets(char s[]);
 int proto_getline(char s[], int lim);
 
+int line_index = 0;
+char line[MAXOP];
+
 /* reverse Polish calculator */
 int main() {
 	int type, i;
@@ -165,71 +168,36 @@ void clear(void) { sp = 0; }
 
 // NOTE: getop()
 
-#include <ctype.h>
-
-int getch(void);
-void ungetch(int);
-
-/* getop: get next character or numeric operand */
 int getop(char s[]) {
-	int i, j, c, len;
-	char line[MAXOP];
+	int c, i;
 
-	len = proto_getline(line, MAXOP);
-	// TODO: this may have gone way off track at this point - instead of
-	// still returning for each operand in line[], should we just process
-	// the line in main() and case each operand as we go?
-	i = 0;
-	while (i < len) {
-		/* skip opening whitespace */
-		while ((s[0] = line[i]) == ' ' || line[i] == '\t')
-			i++;
-
-		/* catch and return single-char operands */
-		s[1] =
-		    '\0'; // if s[0] was non-digit, it is now stored as string
-		if (!isdigit(line[i]) && line[i] != '.' && line[i] != '-')
-			return line[i];
-
-		/* store numbers in s[] for later processing */
-		j = 1;
-		if (line[i] == '-') {
-			i++;
-			if (isdigit(line[i]) || line[i] == '.')
-				s[j++] = line[i++];
-			else
-				return '-';
+	// NOTE: handle return to function ofter main() and terminate cleanly
+	// or call proto_getline to get a new line b/c we don't have on yet
+	if (line[line_index] == '\0') {
+		if (proto_getline(line, MAXOP) == 0) {
+			return EOF;
+		} else {
+			line_index = 0;
 		}
-		while (isdigit(line[i]))
-			s[j++] = line[i++];
-		if (line[i] == '.')
-			s[j++] = line[i++];
-		while (isdigit(line[i]))
-			s[j++] = line[i++];
-		s[j] = '\0';
-		return NUMBER;
 	}
-	return EOF;
-}
-
-// NOTE: getch() and ungetch()
-
-#define BUFSIZE 100
-
-int buf[BUFSIZE]; // buffer for ungetch
-int bufp = 0;     // next free position in buf
-
-int getch(void) { return (bufp > 0) ? buf[--bufp] : getchar(); }
-
-void ungetch(int c) {
-	if (bufp >= BUFSIZE)
-		printf("ungetch: too many characters\n");
-	else {
-		if (c == EOF)
-			return;
-		else
-			buf[bufp++] = c;
-	}
+	/* skip over whitespace */
+	while ((s[0] = c = line[line_index++]) == ' ' || c == '\t')
+		;
+	s[1] = '\0';
+	// TODO: add handler for negative numbers
+	if (!isdigit(c) && c != '.')
+		return c;
+	i = 0;
+	/* cycle through digits and store in s[] */
+	if (isdigit(c))
+		while (isdigit(s[++i] = c = line[line_index++]))
+			;
+	if (c == '.')
+		while (isdigit(s[++i] = c = line[line_index++]))
+			;
+	s[i] = '\0';
+	line_index--;
+	return NUMBER;
 }
 
 void ungets(char s[]) {
