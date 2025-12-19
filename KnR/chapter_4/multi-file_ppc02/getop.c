@@ -5,14 +5,18 @@
 #include <ctype.h>
 #include <stdio.h>
 
-static char holder;
-
 int getop(char s[]) {
 	int i, c;
+	static int holder = 0;
 
-	// TODO: add check for contents of holder
-	while ((s[0] = c = getch()) == ' ' || c == '\t')
-		;
+	if (holder == 0)
+		c = holder;
+	else {
+		c = getch();
+		holder = 0;
+	}
+	while ((s[0] = c) == ' ' || c == '\t')
+		c = getch();
 	s[1] = '\0';
 	if (!isdigit(c) && c != '.')
 		return c;
