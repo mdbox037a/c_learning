@@ -3,18 +3,34 @@
  * routine */
 
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX_STRING 100
 
-char int_to_string(int number, char string[]);
+void int_to_string(int number, char string[]);
 
 int main() {
 	int number;
-	int scan_return;
 	char string[MAX_STRING];
 
-	while ((scan_return = scanf("Enter an integer: %d", &number)) != EOF) {
+	printf("Enter an integer: ");
+	while ((scanf("%d", &number)) == 1) {
 		int_to_string(number, string);
-		printf("Your converted string: %s\n", string);
+		printf("Your converted string: %s\n\n", string);
+		printf("Enter an integer: ");
 	}
 	return 0;
+}
+
+void int_to_string(int number, char string[]) {
+	static int i;
+
+	if (number / 10)
+		int_to_string(number / 10, string);
+	else {
+		i = 0;
+		if (number < 0)
+			string[i++] = '-';
+	}
+	string[i++] = abs(number) % 10 + '0';
+	string[i] = '\0';
 }
