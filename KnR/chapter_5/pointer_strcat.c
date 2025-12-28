@@ -14,4 +14,9 @@ void original_strcat(char s[], char t[]) {
 }
 
 /* New strcat() with pointer arithmetic implementation */
-void pointer_strcat(char *s, char *t) { ; }
+void pointer_strcat(char *s, char *t) {
+	while (*s++)
+		;
+	while (*t)
+		*s++ = *t++;
+}
