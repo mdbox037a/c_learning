@@ -3,6 +3,7 @@
  * argument strings. */
 
 #include <stdio.h>
+#include <string.h>
 #define MAX_LEN 80
 
 void my_strncpy(char *s, char *t, int n);
@@ -13,6 +14,13 @@ int main(void) {
 	char s[MAX_LEN];
 	char t[MAX_LEN];
 	int n;
+
+	/* test my_strncpy; expected result: "test thing" */
+	strcpy(s, "best thing");
+	strcpy(t, "test bring");
+	n = 4;
+	my_strncpy(s, t, n);
+	printf("%s\n", s);
 
 	return 0;
 }
