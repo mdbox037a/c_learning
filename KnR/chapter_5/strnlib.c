@@ -27,7 +27,15 @@ int main(void) {
 
 /* strncpy(s,t,n): copy at most n characters of t to s; return s; pad with \0s
  * if t has fewer than n characters */
-void my_strncpy(char *s, char *t, int n) { ; }
+void my_strncpy(char *s, char *t, int n) {
+	while (n > 0) {
+		if (*t != '\0')
+			*s++ = *t++;
+		else
+			*s++ = '\0';
+		n--;
+	}
+}
 
 /* strncat(s,t,n): concatenate at most n characters of string t to s; terminate
  * s with \0; return s */
