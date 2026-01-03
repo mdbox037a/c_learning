@@ -29,6 +29,14 @@ int main(void) {
 	my_strncat(s, t, n);
 	printf("%s\n", s);
 
+	/* test my_strncmp; expected result: 0, then 8 */
+	strcpy(s, "best thing");
+	strcpy(t, "best thang");
+	n = 7;
+	my_strncmp(s, t, n);
+	n = 8;
+	my_strncmp(s, t, n);
+
 	return 0;
 }
 
