@@ -47,8 +47,6 @@ void my_strncpy(char *s, char *t, int n) {
 /* strncat(s,t,n): concatenate at most n characters of string t to s; terminate
  * s with \0; return s */
 void my_strncat(char *s, char *t, int n) {
-	// placeholder
-	// placeholder
 	while (*s)
 		*s++;
 	while (n > 0) {
