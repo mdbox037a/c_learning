@@ -22,6 +22,13 @@ int main(void) {
 	my_strncpy(s, t, n);
 	printf("%s\n", s);
 
+	/* test my_strncat; expected result: "best thing string"*/
+	strcpy(s, "best thing");
+	strcpy(t, " string bean");
+	n = 7;
+	my_strncat(s, t, n);
+	printf("%s\n", s);
+
 	return 0;
 }
 
@@ -39,7 +46,19 @@ void my_strncpy(char *s, char *t, int n) {
 
 /* strncat(s,t,n): concatenate at most n characters of string t to s; terminate
  * s with \0; return s */
-void my_strncat(char *s, char *t, int n) { ; }
+void my_strncat(char *s, char *t, int n) {
+	// placeholder
+	// placeholder
+	while (*s)
+		*s++;
+	while (n > 0) {
+		if (*t != '\0')
+			*s++ = *t++;
+		else
+			*s++ = '\0';
+		n--;
+	}
+}
 
 /* strncmp(s,t,n): compare at most n characters of string s to string t;
  * return <0 if s<t, 0 if s==t, or >0 if s>t */
