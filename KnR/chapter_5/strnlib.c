@@ -8,12 +8,12 @@
 
 void my_strncpy(char *s, char *t, int n);
 void my_strncat(char *s, char *t, int n);
-void my_strncmp(char *s, char *t, int n);
+int my_strncmp(char *s, char *t, int n);
 
 int main(void) {
 	char s[MAX_LEN];
 	char t[MAX_LEN];
-	int n;
+	int n, result;
 
 	/* test my_strncpy; expected result: "test thing" */
 	strcpy(s, "best thing");
@@ -33,9 +33,11 @@ int main(void) {
 	strcpy(s, "best thing");
 	strcpy(t, "best thang");
 	n = 7;
-	my_strncmp(s, t, n);
+	result = my_strncmp(s, t, n);
+	printf("%d\n", result);
 	n = 8;
-	my_strncmp(s, t, n);
+	result = my_strncmp(s, t, n);
+	printf("%d\n", result);
 
 	return 0;
 }
@@ -68,4 +70,19 @@ void my_strncat(char *s, char *t, int n) {
 
 /* strncmp(s,t,n): compare at most n characters of string s to string t;
  * return <0 if s<t, 0 if s==t, or >0 if s>t */
-void my_strncmp(char *s, char *t, int n) { ; }
+int my_strncmp(char *s, char *t, int n) {
+	while (n > 0) {
+		if (*s == '\0' || *t == '\0') {
+			return *s - *t;
+		} else {
+			if (*s == *t) {
+				*s++;
+				*t++;
+				n--;
+			} else {
+				return *s - *t;
+			}
+		}
+	}
+	return 0;
+}
