@@ -7,7 +7,7 @@
 void ch3_reverse(char s[]) {
 	int c, i, j;
 
-	for (i = 0, j = strlen(s) - 1; i < j; i++, j++) {
+	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
 		c = s[i];
 		s[i] = s[j];
 		s[j] = c;
@@ -16,3 +16,13 @@ void ch3_reverse(char s[]) {
 
 /* ch5_reverse: use pointer arithmetic to reverse the characters of a string
  * in-place */
+void ch5_reverse(char *s) {
+	char *t, c;
+	*t += strlen(s) - 1;
+
+	while (*s) {
+		c = *s;
+		*s++ = *t;
+		*t-- = c;
+	}
+}
