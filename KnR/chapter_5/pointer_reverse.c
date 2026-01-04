@@ -18,9 +18,9 @@ void ch3_reverse(char s[]) {
  * in-place */
 void ch5_reverse(char *s) {
 	char *t, c;
-	*t += strlen(s) - 1;
+	t = s + strlen(s) - 1;
 
-	while (*s) {
+	while (s < t) {
 		c = *s;
 		*s++ = *t;
 		*t-- = c;
