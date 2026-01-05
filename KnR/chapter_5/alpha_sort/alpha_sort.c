@@ -1,21 +1,15 @@
+#include "alpha_sort.h"
 #include <stdio.h>
 #include <string.h>
 
-#define MAXLINES 5000
-
 char *lineptr[MAXLINES]; /* array of pointers to each line start */
 
-int readlines(char *lineptr[], int nlines);
-void writelines(char *lineptr[], int nlines);
-
-void qsort(char *lineptr[], int left, int right);
-
 /* sort input lines */
-void main(void) {
+int main(void) {
 	int nlines; /* number of input lines to read */
 
 	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-		qsort(lineptr, 0, nlines - 1);
+		my_qsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
 		return 0;
 	} else {
@@ -25,8 +19,6 @@ void main(void) {
 }
 
 #define MAXLEN 1000
-int section1_9_getline(char *, int);
-char *alloc(int);
 
 /* readlines: read input lines */
 int readlines(char *lineptr[], int maxlines) {
@@ -34,8 +26,8 @@ int readlines(char *lineptr[], int maxlines) {
 	char *p, line[MAXLEN];
 
 	nlines = 0;
-	while ((len = getline(line, MAXLEN)) > 0) {
-		if (nlines >= maxlines || p = alloc(len) == NULL)
+	while ((len = my_getline(line, MAXLEN)) > 0) {
+		if (nlines >= maxlines || (p = alloc(len)) == NULL)
 			return -1;
 		else {
 			line[len - 1] = '\0'; /* delete newline */
