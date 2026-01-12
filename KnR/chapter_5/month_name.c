@@ -8,6 +8,18 @@ char *month_name(int n) {
 	return (n < 1 || n > 12) ? name[0] : name[n];
 }
 
+/* exercise 5-9: Rewrite the routines of day_of_year and month_day with pointers
+ * instead of indexing */
+
+char *new_month_name(int n) {
+	static char *name[] = {
+	    "Illegal month", "January",  "February", "March",  "April",
+	    "May",           "June",     "July",     "August", "September",
+	    "October",       "November", "December"};
+
+	return (n < 1 || n > 12) ? *name : *name + n;
+}
+
 /* attempting to do the same as above - take up more space, but able to edit
  * months now? */
 char *different_month_name(int n) {
