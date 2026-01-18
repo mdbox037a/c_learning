@@ -3,7 +3,7 @@
 int main() {
 	int baseFare = 120;
 	int luggageFee = 30;
-	int hasCoupon = 1;
+	int hasCoupon = 0;
 
 	int totalBeforeDiscount;
 	int finalTotal;
