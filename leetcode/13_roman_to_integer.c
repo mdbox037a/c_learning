@@ -9,5 +9,47 @@ int romanToInt(char *s) {
 	 * previous index -> subtract in that case
 	 * 4) return total */
 
-	return 0;
+	int i;
+	int total = 0;
+	int t[16];
+	int sign = 1;
+
+	for (i = 0; s[i] != '\0'; i++) {
+		switch (s[i]) {
+		case 'I':
+			t[i] = 1;
+			break;
+		case 'V':
+			t[i] = 5;
+			break;
+		case 'X':
+			t[i] = 10;
+			break;
+		case 'L':
+			t[i] = 50;
+			break;
+		case 'C':
+			t[i] = 100;
+			break;
+		case 'D':
+			t[i] = 500;
+			break;
+		case 'M':
+			t[i] = 1000;
+			break;
+		}
+	}
+
+	t[i] = 0;
+
+	i = 0;
+	while (t[i] != 0) {
+		if (t[i] < t[i + 1])
+			sign = -1;
+		else
+			sign = 1;
+		total += t[i++] * sign;
+	}
+
+	return total;
 }
