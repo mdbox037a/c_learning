@@ -5,13 +5,33 @@
 int stack[STACK_CAPACITY];
 int top = -1;
 
-int is_empty(void) { return 0; }
+int is_empty(void) {
+	if (top == -1)
+		return 1;
+	else
+		return 0;
+}
 
-int is_full(void) { return 0; }
+int is_full(void) {
+	if (top == STACK_CAPACITY - 1)
+		return 1;
+	else
+		return 0;
+}
 
-void push(int value) {}
+void push(int value) {
+	if (is_full() == 0)
+		stack[++top] = value;
+}
 
-int pop(void) { return 0; }
+int pop(void) {
+	int value;
+	if (is_empty() == 0) {
+		value = stack[top--];
+		return value;
+	} else
+		return -1;
+}
 
 int main() {
 	push(10);
