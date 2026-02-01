@@ -1,7 +1,17 @@
 #include <stdio.h>
 
 void sort_lap_times(int times[], int length) {
-	// your code here
+	int i, j, temp;
+
+	for (i = 0; i < length - 1; i++) {
+		for (j = 0; j < length - 1; j++) {
+			if (times[j] > times[j + 1]) {
+				temp = times[j + 1];
+				times[j + 1] = times[j];
+				times[j] = temp;
+			}
+		}
+	}
 }
 
 int main() {
