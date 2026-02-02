@@ -2,11 +2,39 @@
 
 #define NULL_INDEX -1
 
-void print_list(int values[], int next_index[], int head_index) {}
+void print_list(int values[], int next_index[], int head_index) {
+	int current = head_index;
 
-int length_of_list(int next_index[], int head_index) {}
+	while (current != -1) {
+		printf("%d ", values[current]);
+		current = next_index[current];
+	}
+	printf("\n");
+}
 
-int sum_of_list(int values[], int next_index[], int head_index) {}
+int length_of_list(int next_index[], int head_index) {
+	int count = 0;
+	int current = head_index;
+
+	while (current != -1) {
+		count++;
+		current = next_index[current];
+	}
+
+	return count;
+}
+
+int sum_of_list(int values[], int next_index[], int head_index) {
+	int total = 0;
+	int current = head_index;
+
+	while (current != -1) {
+		total += values[current];
+		current = next_index[current];
+	}
+
+	return total;
+}
 
 int main() {
 	int values[5] = {10, 20, 30, 40, 50};
