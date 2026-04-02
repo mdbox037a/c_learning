@@ -9,7 +9,7 @@ object_t *object_new(int value) {
     return NULL;
   }
 
-  obj->ref_count = 0;
+  obj->ref_count = 1;
   obj->value = value;
   return obj;
 }
@@ -33,7 +33,7 @@ void object_release(object_t *obj) {
     return;
   }
 
-  obj->ref_count += 1;
+  obj->ref_count -= 1;
 }
 
 int destroyed_count(void) { return destroyed_objects; }
