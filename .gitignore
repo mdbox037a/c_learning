@@ -3,5 +3,6 @@ binaries/
 testing_inputs/
 .idea/
 
-# ignote files with these extensions
+# ignore files with these extensions
 .clang-format
+.editorconfig
