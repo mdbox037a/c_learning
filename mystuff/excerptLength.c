@@ -102,7 +102,7 @@ int main() {
         counter++;
         retry = 0;
       } else {
-        printf("\nThat is not a valid choice...\n");
+        printf("\nThat is not a valid choice - please try again\n");
         retry = 1;
       }
     }
