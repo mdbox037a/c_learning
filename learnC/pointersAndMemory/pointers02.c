@@ -2,8 +2,8 @@
 
 int main() {
 
-	double g = 9.81;
-	double pi = 3.14;
+	double g = 9.95;
+	double pi = 3.04;
 
 	// Checkpoint 1 code goes here.
 	double *dblPtr = &g;
