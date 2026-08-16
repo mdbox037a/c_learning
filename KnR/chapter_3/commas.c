@@ -11,7 +11,7 @@ void reverse(char s[]) {
 	}
 }
 
-void reverse_compressed(char s[]) {
+void reverse_comp(char s[]) {
 	int c, i, j;
 
 	for (i = 0, j = strlen(s) - 1; i < j; i++, j--)
